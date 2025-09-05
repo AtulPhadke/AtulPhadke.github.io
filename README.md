@@ -1,5 +1,3 @@
-# Atul Phadke
-
 **Email:** atulphadke8@gmail.com  
 **Phone:** (603) 404-1025  
 **Location:** Nashua, NH
