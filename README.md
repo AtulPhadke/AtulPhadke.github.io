@@ -45,10 +45,20 @@ Expected Apr 2028 | GPA: 3.8 | Study Abroad: Thessaloniki, Greece | Squash Club 
 ## Manuscripts in Preparation
 
 1. **CAP-GENIE: An open-source tool for analyzing sequencing data from AAV vector selections and screens**  
-   *Atul Phadke, Killian S. Hanlon, Casey A. Maguire*
+   ***Atul Phadke**, Killian S. Hanlon, Casey A. Maguire*
 
 2. **A blood-brain barrier-penetrating AAV evolved in non-human primates transduces perfused human brain lobectomies**  
-   *Adam V. Crain, Atul Phadke, Killian S. Hanlon, Pedro Cruz, Kristopher T. Kahle, R. Marc Richardson, Dai Hoang Tran, Ming Cheng, Pazhanichamy Kalailingam, Sabyasachi Das, Sujin Lee, Rajeev Malhotra, Greta W. Radcliff, Paula Espinoza, D. Cristopher Bragg, Derek Oakley, Mirra Chung, Nikita Patel, Demitri de la Cruz, Clayton W. Beard, Kristi D. Viles, Armin Hekele, David Scott, Mary Herrick, Matthew P. Frosch, Allison Andrews, Servio H. Ramirez, Patricia L. Musolino, Casey A. Maguire*
+   *Adam V. Crain, **Atul Phadke**, Killian S. Hanlon, Pedro Cruz, Kristopher T. Kahle, R. Marc Richardson, Dai Hoang Tran, Ming Cheng, Pazhanichamy Kalailingam, Sabyasachi Das, Sujin Lee, Rajeev Malhotra, Greta W. Radcliff, Paula Espinoza, D. Cristopher Bragg, Derek Oakley, Mirra Chung, Nikita Patel, Demitri de la Cruz, Clayton W. Beard, Kristi D. Viles, Armin Hekele, David Scott, Mary Herrick, Matthew P. Frosch, Allison Andrews, Servio H. Ramirez, Patricia L. Musolino, Casey A. Maguire*
+
+---
+
+## Presentations
+
+1. **Psilocybin as a Treatment for Repetitive Mild Head Injury: Evidence from Neuroradiology and Molecular Biology**  
+   ***Atul Phadke** et al.*
+
+2. **In vivo neuropathology: Detecting site-specific changes in neuroinflammation following treatment with low doses of known neurotoxins**  
+   *Athreya, D.S, Kedharnath S, **Phadke, A** et al.*
 
 ---
 
