@@ -36,7 +36,6 @@ Expected Apr 2028 | GPA: 3.8 | Study Abroad: Thessaloniki, Greece | Squash Club 
 - Collaborator of an upcoming **CTNI cloud application** for visualization, pre-processing, image analysis, and post-processing of neuro-imaging studies.
 - Developed an innovative technique for calculating Blood Brain Barrier permeability using QUTE-CE MRI to analyze Traumatic Brain Injuries.
 - Created **BRUKER MRI to NII conversion software** that improves the previous flagship method used previously by over 92%.
-- Submitted and approved **2 research papers** for presentation at the Society for Neuroscience 2023 (SFN) on the effects of diabetes on the brain and detecting neuroinflammation from dosages of known neurotoxins.
 
 ---
 
