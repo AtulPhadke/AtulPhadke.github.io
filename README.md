@@ -64,7 +64,7 @@ Expected Apr 2028 | GPA: 3.8 | Study Abroad: Thessaloniki, Greece | Squash Club 
 
 **Programming:** Python, C++, JavaScript, SQL
 
-**Machine Learning & Data Science:** Neural networks, Deep learning, Bioinformatics tools
+**Machine Learning & Data Science:** Neural networks, Deep learning, Bioinformatics tools, PyTorch, TensorFlow, scikit-learn
 
 **Web Development:** Full-stack (frontend & backend), UI/UX design, API integration
 
