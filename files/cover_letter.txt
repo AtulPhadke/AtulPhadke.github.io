@@ -1,0 +1,68 @@
+Atul Phadke
+
+Student @ 
+Northeastern University
+
+[Hiring Manager Name]
+
+Hiring Manager, [Company Name]
+
+[Job Title]
+
+Dear [Hiring Manager Name],
+
++1 (603) 404 1025
+
+atulphadke8@gmail.com
+
+16 Forsythia Drive
+
+Nashua, New Hampshire
+
+October 5th 2025 
+
+I am writing to express my interest in the [Position Title] position at [Company Name], as advertised 
+
+on [Job Board or Company Website]. I am a Computer Science and Behavioral Neuroscience major 
+
+at Northeastern University with  experience building AI-driven biomedical software, full-stack 
+
+applications, and advanced analysis pipelines. My background intersects biotechnology and 
+
+computer science, aligning closely with [Company Name]’s mission to [mention company focus or 
+
+goal brieﬂy].
+
+During my internship at Mass General Hospital’s Gene and Cell Therapy Institute, I engineered 
+
+CAP-GENIE, a multi-platform sequencing analysis suite built with Python, C++, and AWS. This system 
+
+incorporated optimized Cython modules and multithreaded computation capable of processing over 
+
+2 million reads per second, reducing runtime by 40%. I also developed an AI/ML protein motif 
+
+analysis pipeline using PyTorch and scikit-learn that achieved 95% accuracy in detecting functionally 
+
+relevant motifs.
+
+During my internship at Northeastern University’s Center for Translational Neuroimaging, I led the 
+
+development of neuroimaging pipelines and a cloud-based Flask web app for DTI, fMRI, and 
+
+QUTE-CE data processing, improving runtime and analysis time by 92%. These experiences 
+
+strengthened my technical foundation and my ability to deliver reliable, scalable solutions that 
+
+accelerate research and discovery.
+
+I am eager to contribute my computational and analytical skills to [Company Name], where I can help 
+
+develop cutting-edge solutions in [brieﬂy describe company’s focus area or project type]. Thank you 
+
+for your time and consideration. I look forward to the possibility of speaking with you.
+
+Sincerely,
+
+Atul Phadke
+
+

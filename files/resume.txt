@@ -1,0 +1,70 @@
+Atul Phadke 
+Boston, MA  |  603-404-1025  |  phadke.at@northeastern.edu  |  https://www.linkedin.com/in/atul-phadke8/ 
+Co-op availability: Jan - June 2026 
+
+Education 
+Northeastern University – Khoury College of Computer Sciences                                Expected May 2028 | Boston, MA     
+Candidate for Bachelor of Science in Computer Science & Behavioral Neuroscience; GPA: 3.75/4.0 
+Coursework:     Fundamentals of Computer Science, Discrete Structures, Programming in C++,     
+                           Program Design and Implementation, Organic Chemistry, General Biology II 
+Skills 
+
+Languages: Python, C/C++,  JavaScript, SQL, Swift, MATLAB 
+Web: Flask, Node.js/Express, REST, Auth, AWS ElasticBeanstalk, ElectronJS, Wix Velo, HTML/CSS 
+Data/ML: PyTorch, TensorFlow, scikit-learn, numpy, pandas, cython 
+Tools: Git, Git Bash, LaTeX, MongoDB 
+Wet Lab: PCR, qPCR, bacteria culturing 
+
+Experience 
+
+Mass General Hospital – Gene and Cell Therapy Institute                                            May 2024 – Aug 2025 | Boston, MA 
+Software Engineer Intern 
+●  Engineered CAP-GENIE analysis suite across CLI, web, and desktop platforms using Python, C++, Electron, 
+JavaScript, Flask, and AWS (EC2, S3, CloudWatch), implementing Cython-optimized sequence parsing, 
+multithreaded C++ modules with OpenMP capable of processing over 2M reads/sec, reducing runtime by 40%. 
+●  Developed an AI/ML protein motif analysis system using PyTorch and Scikit-learn, integrating ESM2/ProtBERT 
+embeddings, HDBSCAN/UMAP clustering, and Random Forest models, achieving 95% accurate retrieval of 
+functionally relevant motifs. 
+
+Northeastern University – Center for Translational Neuroimaging      
+Software Engineer Intern 
+●  Led development of end-to-end neuroimaging pipelines for DTI, fMRI, and QUTE-CE analysis using Python, C++, 
+
+        Feb 2021 – Mar 2024 | Boston, MA 
+
+Bash, and MATLAB, improving processing throughput and read accuracy of the flagship by 92%. 
+
+●  Co-created CTNI cloud-based web application with Flask and AWS, supporting visualization, preprocessing, image 
+
+● 
+
+analysis, and postprocessing workflows, reducing processing time by 35%. 
+Implemented a novel AI-driven method for Blood-Brain Barrier permeability quantification using QUTE-CE MRI, 
+integrating C++ and Python for image reconstruction and segmentation. 
+
+Projects 
+
+Admission Forge – Developer                                                                                                               May 2024 – July 2024 
+●  Built web platform to host admissions data for 50+ universities using ML-based data collection with Python’s 
+
+BeautifulSoup, integrating APIs within the Wix framework to support interactive querying. 
+
+Internship Select – Developer                                                                                                               Nov 2024 – Dec 2024 
+●  Constructed an AI-powered internship and job aggregation platform for college students in tech, scraping and 
+indexing 500+ active postings using Python and Flask with asynchronous pipelines for scalable data ingestion. 
+●  Optimized API performance with caching and efficient query handling, achieving <200ms average response time for 
+
+user requests across 500+ internship listings. 
+
+Manuscripts in Preparation 
+
+1.  CAP-GENIE: An open-source tool for analyzing sequencing data from AAV vector selections and screens. 
+
+Atul Phadke, Killian S. Hanlon, Casey A. Maguire 
+
+2.  A blood-brain barrier-penetrating AAV evolved in non-human primates transduces perfused human brain lobectomies. 
+
+Adam V. Crain, Atul Phadke, Killian S. Hanlon, Pedro Cruz, Kristopher T. Kahle, R. Marc Richardson, et al. 
+
+ 
+

@@ -1,16 +1,16 @@
 {
   "basics": {
-    "name": "Your Sidebar Name",
-    "email": "none@example.org",
+    "name": "Atul Phadke",
+    "email": "atulphadke8@gmail.com",
     "phone": "",
-    "website": "https://academicpages.github.io",
-    "summary": "Currently employed at Red Brick University. Short biography for the left-hand sidebar",
+    "website": "https://atulphadke.github.io",
+    "summary": "Sophomore at Northeastern University studying Computer Science and Behavioral Neuroscience. Interested in AI/ML and bioinformatics.",
     "location": {
-      "address": "",
-      "postalCode": "",
-      "city": "Earth",
+      "address": "16 Forsythia Drive",
+      "postalCode": "03062",
+      "city": "Nashua",
       "countryCode": "US",
-      "region": ""
+      "region": "New Hampshire"
     },
     "profiles": [
       {
@@ -26,43 +26,25 @@
       {
         "network": "GitHub",
         "username": "academicpages",
-        "url": "https://github.com/academicpages"
+        "url": "https://github.com/AtulPhadke"
       }
     ]
   },
   "work": [],
   "education": [
     {
-      "institution": "GitHub University",
-      "area": "Ph.D in Version Control Theory",
-      "studyType": "",
-      "startDate": "",
-      "endDate": "2018",
-      "gpa": null,
-      "courses": []
-    },
-    {
-      "institution": "GitHub University",
-      "area": "M.S. in Jekyll",
-      "studyType": "",
-      "startDate": "",
-      "endDate": "2014",
-      "gpa": null,
-      "courses": []
-    },
-    {
-      "institution": "GitHub University",
-      "area": "B.S. in GitHub",
-      "studyType": "",
-      "startDate": "",
-      "endDate": "2012",
-      "gpa": null,
-      "courses": []
+      "institution": "Northeastern University",
+      "area": "Bachelor of Science in Computer Science and Behavioral Neuroscience",
+      "studyType": "Expected May 2028",
+      "startDate": "September 2024",
+      "endDate": "May 2028",
+      "gpa": 3.75,
+      "courses": ["Fundamentals of Computer Science", "Discrete Structures", "Programming in C++", "Program Design and Implementation", "Organic Chemistry", "General Biology II"]
     }
   ],
-  "skills": [],
-  "languages": [],
-  "interests": [],
+  "skills": ["Python", "C/C++", "JavaScript", "SQL", "Swift", "MATLAB", "Flask", "Node.js/Express", "REST", "Auth", "AWS ElasticBeanstalk", "ElectronJS", "Wix Velo", "HTML/CSS", "PyTorch", "TensorFlow", "scikit-learn", "numpy", "pandas", "cython", "Git", "Git Bash", "LaTeX", "MongoDB", "PCR", "qPCR", "bacteria culturing"],
+  "languages": ["English"],
+  "interests": ["AI/ML", "bioinformatics", "software engineering", "web development", "data analysis", "genomics", "protein structure prediction", "protein motif analysis", "protein structure analysis", "protein structure prediction", "protein structure analysis", "protein structure prediction", "protein structure analysis"],
   "references": [],
   "publications": [
     {
@@ -121,22 +103,6 @@
       "event": "Testing Institute of America 2014 Annual Conference",
       "date": "2014-03-01",
       "location": "Los Angeles, CA, USA",
-      "description": ""
-    }
-  ],
-  "teaching": [
-    {
-      "course": "Teaching experience 1",
-      "institution": "University 1, Department",
-      "date": "2014-01-01",
-      "role": "Undergraduate course",
-      "description": ""
-    },
-    {
-      "course": "Teaching experience 2",
-      "institution": "University 1, Department",
-      "date": "2015-01-01",
-      "role": "Workshop",
       "description": ""
     }
   ],

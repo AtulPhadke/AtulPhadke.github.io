@@ -1,18 +1,10 @@
 # Authors
 
-Name Name:
-  name        : "Name Name"
-  uri         : "http://name.com"
-  email       : "name@name.com"
-  bio         : "This is the first name."
-  avatar      : "bio-photo-2.jpg"
-  twitter     : "name"
-  google_plus : "Name"
-
-Name2 Name2:
-  name        : "Name2 Name2"
-  email       : "name2@name2.com"
-  bio         : "I ordered what?"
+Atul Phadke:
+  name        : "Atul Phadke"
+  uri         : "https://atulphadke.github.io"
+  email       : "phadke.at@northeastern.edu"
+  bio         : "CS & Behavioral Neuroscience @ Northeastern. AI/ML and bioinformatics projects."
   avatar      : "bio-photo.jpg"
-  twitter     : "name2"
-  google_plus : "Name"
+  twitter     : 
+  google_plus : 
