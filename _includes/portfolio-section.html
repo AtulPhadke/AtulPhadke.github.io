@@ -1,0 +1,235 @@
+<section class="portfolio-section" id="{{ include.id | default: include.title | downcase | replace: ' ', '-' }}" style="border:1px solid #e5e7eb;border-radius:16px;padding:24px;margin-bottom:24px;position:relative;background:#ffffff">
+  <div style="max-width:1040px;margin:0 auto;position:relative;display:grid;grid-template-columns:minmax(320px,1fr) minmax(320px,420px);grid-auto-rows:auto;gap:24px;align-items:start">
+    {% if include.request_access %}
+    {% assign _modal_id = include.id | default: include.title | downcase | replace: ' ', '-' | append: '-reqmodal' %}
+    {% assign _btn_id = _modal_id | append: '-btn' %}
+    <button id="{{ _btn_id }}" type="button" style="position:absolute;top:0;right:0;border:1px solid #e5e7eb;border-radius:999px;padding:6px 10px;font-weight:700;font-size:12px;background:#ffffff;color:#111827;cursor:pointer">Request access</button>
+    <div id="{{ _modal_id }}" aria-hidden="true" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999">
+      <div style="position:absolute;right:50%;transform:translateX(50%);top:12%;width:min(560px,92%);background:#fff;border:1px solid #e5e7eb;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.35);padding:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <div style="font-weight:800;font-size:18px">Request repository access</div>
+          <button type="button" data-close style="border:1px solid #e5e7eb;border-radius:8px;padding:4px 8px;background:#fff;cursor:pointer">Close</button>
+        </div>
+        <div style="font-size:13px;opacity:.85;margin-bottom:10px">{{ include.title }}{% if include.repo %} — {{ include.repo }}{% endif %}</div>
+        <form data-form style="display:grid;grid-template-columns:1fr;gap:10px">
+          <label style="display:grid;gap:4px">
+            <span style="font-weight:700;font-size:12px">Email address</span>
+            <input name="email" type="email" required placeholder="you@example.com" style="border:1px solid #e5e7eb;border-radius:8px;padding:8px" />
+          </label>
+          <label style="display:grid;gap:4px">
+            <span style="font-weight:700;font-size:12px">Company name</span>
+            <input name="company" type="text" placeholder="Company / Organization" style="border:1px solid #e5e7eb;border-radius:8px;padding:8px" />
+          </label>
+          <label style="display:grid;gap:4px">
+            <span style="font-weight:700;font-size:12px">Reason for access</span>
+            <textarea name="reason" rows="4" placeholder="Brief reason for requesting access" style="border:1px solid #e5e7eb;border-radius:8px;padding:8px;resize:vertical"></textarea>
+          </label>
+          <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:6px">
+            <button type="button" data-close style="border:1px solid #e5e7eb;border-radius:8px;padding:8px 12px;background:#fff;cursor:pointer">Cancel</button>
+            <button type="submit" style="border:1px solid #111827;border-radius:8px;padding:8px 12px;background:#111827;color:#fff;font-weight:700;cursor:pointer">Send request</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script>
+      (function(){
+        var modal = document.getElementById('{{ _modal_id }}');
+        var btn = document.getElementById('{{ _btn_id }}');
+        if(!modal || !btn) return;
+        function open(){ modal.style.display='block'; document.body.style.overflow='hidden'; }
+        function close(){ modal.style.display='none'; document.body.style.overflow=''; }
+        btn.addEventListener('click', open);
+        modal.addEventListener('click', function(e){ if(e.target === modal || e.target.hasAttribute('data-close')) close(); });
+        document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
+        var form = modal.querySelector('form[data-form]');
+        if(form){
+          form.addEventListener('submit', function(e){
+            e.preventDefault();
+            var email = form.querySelector('[name=email]').value.trim();
+            var company = form.querySelector('[name=company]').value.trim();
+            var reason = form.querySelector('[name=reason]').value.trim();
+            var to='{{ site.author.email }}';
+            var subject='Access request: ' + {{ include.title | jsonify }};
+            var body = 'Requester email: ' + email + '\n' + (company?('Company: '+company+'\n'):'') + 'Reason: ' + reason + '\n' + {% if include.repo %}('Repository: ' + {{ include.repo | jsonify }} + '\n') + {% endif %} 'Page: ' + location.href;
+            var mailto = 'mailto:' + encodeURIComponent(to) + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+            window.location.href = mailto;
+            close();
+          });
+        }
+      })();
+    </script>
+    {% endif %}
+    <div style="grid-column:1 / -1;grid-row:1">
+      <h2 style="margin:0 0 6px;font-size:36px;line-height:1.15;font-weight:800">{{ include.title }}</h2>
+      {% if include.subtitle %}
+      <div style="margin:0 0 0;font-weight:700;opacity:.85">{{ include.subtitle }}</div>
+      {% endif %}
+    </div>
+    <div style="grid-column:1 / -1;grid-row:2">
+      {% if include.description %}
+      <p style="margin:0 0 12px;line-height:1.6">{{ include.description }}</p>
+      {% endif %}
+      <div style="display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:nowrap">
+        <div style="min-width:0;flex:1 1 auto">
+          {% assign langs = include.languages | default: "" | split: "|" %}
+          {% if langs.size > 0 and langs.first != "" %}
+          <div style="margin:10px 0 6px;font-weight:700;opacity:.85">Languages</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px">
+            {% for l in langs %}
+            <span style="border:1px solid #e5e7eb;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:600">{{ l }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+          {% assign fws = include.frameworks | default: "" | split: "|" %}
+          {% if fws.size > 0 and fws.first != "" %}
+          <div style="margin:6px 0 6px;font-weight:700;opacity:.85">Frameworks</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px">
+            {% for fw in fws %}
+            <span style="border:1px solid #e5e7eb;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:600">{{ fw }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+        {% if include.logo %}
+        <div style="flex:0 0 {{ include.logo_max_width_pct | default: '40%' }};max-width:{{ include.logo_max_width_pct | default: '40%' }};display:flex;justify-content:flex-end;align-items:center;margin-top:{{ include.logo_margin_top | default: '0' }}">
+          <img src="{{ include.logo }}" alt="{{ include.title }} logo" style="width:100%;height:auto;max-height:{{ include.logo_max_height | default: '140' }}px;object-fit:contain"/>
+        </div>
+        {% endif %}
+      </div>
+      {% assign bullet_list = include.bullets | default: "" | split: "|" %}
+      {% if bullet_list.size > 0 and bullet_list.first != "" %}
+      <ul style="margin:0 0 14px; padding-left:18px">
+        {% for item in bullet_list %}
+        <li style="margin:4px 0">{{ item }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% assign tag_list = include.tags | default: "" | split: "|" %}
+      {% if tag_list.size > 0 and tag_list.first != "" %}
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px">
+        {% for tag in tag_list %}
+        <span style="border:1px solid #e5e7eb;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:600">{{ tag }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        {% if include.link %}
+        <a href="{{ include.link }}" style="border:1px solid #e5e7eb;padding:8px 12px;border-radius:10px;text-decoration:none;font-weight:700">Open</a>
+        {% endif %}
+      </div>
+    </div>
+    {% unless include.hide_cover %}
+    <div style="grid-column:1 / -1;grid-row:3">
+      <div style="position:relative;width:100%;aspect-ratio:16/9;border:1px solid #000;border-radius:12px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#ffffff">
+        {% if include.cover_video_src %}
+        {% assign _cov_id = include.id | default: include.title | downcase | replace: ' ', '-' | append: '-covervid' %}
+        {% assign _cov_src = include.cover_video_src %}
+        {% assign _cov_type = 'video/mp4' %}
+        {% if _cov_src contains '.mov' %}
+          {% assign _cov_type = 'video/quicktime' %}
+        {% elsif _cov_src contains '.webm' %}
+          {% assign _cov_type = 'video/webm' %}
+        {% endif %}
+        <video id="{{ _cov_id }}" autoplay muted loop playsinline preload="auto" {% if include.cover_poster_src %}poster="{{ include.cover_poster_src }}"{% endif %} style="width:100%;height:100%;object-fit:cover;pointer-events:none;background:#000">
+          <source src="{{ _cov_src }}" type="{{ _cov_type }}" />
+        </video>
+        <script>
+          (function(){
+            var v = document.getElementById('{{ _cov_id }}');
+            if(!v) return;
+            try {
+              v.muted = true; v.autoplay = true; v.loop = true; v.playsInline = true;
+              v.setAttribute('muted',''); v.setAttribute('playsinline',''); v.removeAttribute('controls');
+              var tryPlay = function(){ var p = v.play(); if(p && p.catch){ p.catch(function(){ /* ignore */ }); } };
+              if (v.readyState >= 2) { tryPlay(); }
+              else { v.addEventListener('canplay', tryPlay, { once:true }); }
+            } catch(e) { /* no-op */ }
+          })();
+        </script>
+        {% elsif include.cover_gallery_suffix %}
+        {% assign _cover_concat = "" %}
+        {% for f in site.static_files %}
+          {% if f.path contains '/images/' and f.path contains include.cover_gallery_suffix %}
+            {% assign _cover_concat = _cover_concat | append: f.path | append: '|' %}
+          {% endif %}
+        {% endfor %}
+        {% assign _cover_images = _cover_concat | split: '|' %}
+        {% if _cover_images.size > 0 %}
+        {% assign _cover_id = include.id | default: include.title | downcase | replace: ' ', '-' | append: '-cover' %}
+        <div id="{{ _cover_id }}" style="position:absolute;inset:0">
+          {% for img in _cover_images %}
+            {% if img != '' %}
+            <img src="{{ img }}" alt="{{ include.title }} cover image" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none"/>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <script>
+          (function(){
+            var c = document.getElementById('{{ _cover_id }}');
+            if(!c) return; var imgs = c.querySelectorAll('img'); if(!imgs.length) return;
+            var i=0; imgs[0].style.display='block'; var ms={{ include.cover_gallery_interval | default: 3000 }};
+            setInterval(function(){ imgs[i].style.display='none'; i=(i+1)%imgs.length; imgs[i].style.display='block'; }, ms);
+          })();
+        </script>
+        {% else %}
+        <div style="font-weight:700;opacity:.75">{{ include.media_placeholder | default: "Place image or video here" }}</div>
+        {% endif %}
+        {% elsif include.cover_image_src and include.cover_pan %}
+        <div style="position:absolute;inset:0;background-image:url('{{ include.cover_image_src }}');background-size:auto 100%;background-repeat:no-repeat;background-position:0% 50%;animation:panX {{ include.cover_pan_duration | default: '30s' }} linear infinite"></div>
+        <style>
+          @keyframes panX {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+          }
+        </style>
+        {% elsif include.cover_image_src %}
+        <img src="{{ include.cover_image_src }}" alt="{{ include.title }} cover" style="width:100%;height:100%;object-fit:cover"/>
+        {% else %}
+        <div style="font-weight:700;opacity:.75">{{ include.media_placeholder | default: "Place image or video here" }}</div>
+        {% endif %}
+      </div>
+      {% if include.gallery_suffix %}
+      {% assign _gallery_concat = "" %}
+      {% for f in site.static_files %}
+        {% if f.path contains '/images/' and f.path contains include.gallery_suffix %}
+          {% assign _gallery_concat = _gallery_concat | append: f.path | append: '|' %}
+        {% endif %}
+      {% endfor %}
+      {% assign _gallery_images = _gallery_concat | split: '|' %}
+      {% if _gallery_images.size > 0 %}
+      {% assign _gal_id = include.id | default: include.title | downcase | replace: ' ', '-' | append: '-gallery' %}
+      <div id="{{ _gal_id }}" style="margin-top:10px;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;position:relative;height:240px;background:#ffffff">
+        {% for img in _gallery_images %}
+          {% if img != '' %}
+          <img src="{{ img }}" alt="{{ include.title }} gallery image" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:none;background:#ffffff"/>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <script>
+        (function(){
+          var c = document.getElementById('{{ _gal_id }}');
+          if(!c) return;
+          var imgs = c.querySelectorAll('img');
+          if(!imgs.length) return;
+          var idx = 0; imgs[0].style.display = 'block';
+          var interval = {{ include.gallery_interval | default: 3000 }};
+          setInterval(function(){
+            imgs[idx].style.display = 'none';
+            idx = (idx + 1) % imgs.length;
+            imgs[idx].style.display = 'block';
+          }, interval);
+        })();
+      </script>
+      {% endif %}
+      {% endif %}
+      {% if include.bottom_media_src %}
+      <div style="width:100%;margin-top:10px">
+        <video src="{{ include.bottom_media_src }}" controls style="width:100%;border:1px solid #e5e7eb;border-radius:12px;background:#ffffff"></video>
+      </div>
+      {% endif %}
+    </div>
+    {% endunless %}
+  </div>
+</section>
+

@@ -1,0 +1,31 @@
+<div class="portfolio-card" style="display:flex;flex-direction:column;background:#0b1020;border:1px solid #1f2937;border-radius:16px;overflow:hidden;box-shadow:0 10px 24px rgba(0,0,0,.25)">
+  <div style="background:linear-gradient(135deg,#0f0c29 0%,#302b63 50%,#24243e 100%);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:#cbd5e1;font-weight:800;font-size:16px;letter-spacing:.2px;">
+    {{ include.media_placeholder | default: "Place your image or video here" }}
+  </div>
+  <div style="padding:16px">
+    <h3 style="margin:0 0 6px;font-weight:800;color:#f8fafc;font-size:20px;line-height:1.2">{{ include.title }}</h3>
+    {% if include.subtitle %}
+    <div style="margin:0 0 8px;color:#a5b4fc;font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.5px">{{ include.subtitle }}</div>
+    {% endif %}
+    {% if include.description %}
+    <p style="margin:0 0 12px;color:#cbd5e1;font-size:14px;line-height:1.5">{{ include.description }}</p>
+    {% endif %}
+    {% assign tag_list = include.tags | default: "" | split: "|" %}
+    {% if tag_list.size > 0 and tag_list.first != "" %}
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px">
+      {% for tag in tag_list %}
+      <span style="background:#111827;border:1px solid #1f2937;color:#e5e7eb;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:600">{{ tag }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+    <div style="display:flex;gap:12px;align-items:center">
+      {% if include.link %}
+      <a href="{{ include.link }}" style="background:#ff6b6b;color:#0b0f1a;padding:8px 12px;border-radius:10px;text-decoration:none;font-weight:800;font-size:14px">Open</a>
+      {% endif %}
+      {% if include.repo %}
+      <a href="{{ include.repo }}" style="color:#e5e7eb;padding:8px 0;text-decoration:none;font-weight:700;font-size:14px">Source →</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+

@@ -1,14 +1,101 @@
 ---
-layout: archive
-title: "Portfolio"
+layout: single
+title: ""
 permalink: /portfolio/
 author_profile: true
 ---
 
 {% include base_path %}
+<style>
+  html { scroll-behavior: smooth; }
+  .projects-layout { position: relative; }
+  .projects-sidebar { position: sticky; top: 80px; align-self: start; }
+  @media (min-width: 1100px) {
+    .projects-grid { display: grid; grid-template-columns: 1fr 240px; gap: 16px; }
+  }
+  @media (max-width: 1099px) {
+    .projects-grid { display: block; }
+  }
+  .projects-sidebar a { display:block; padding:8px 10px; border:1px solid #e5e7eb; border-radius:10px; margin-bottom:8px; text-decoration:none; font-weight:700; color:#111827; }
+  .projects-sidebar a:hover { background:#f8fafc; }
+</style>
+
+<div class="projects-grid">
+  <div>
 
 
-{% for post in site.portfolio %}
-  {% include archive-single.html %}
-{% endfor %}
+
+{% include portfolio-section.html 
+   title="capgenie"
+   subtitle="AI NGS analysis suite"
+   description="capgenie is a multi‑platform NGS suite that parses over 2 million reads per second with Cython and OpenMP‑accelerated C++, reducing runtime by 40%, and delivers AI‑powered motif discovery using ESM2/ProtBERT embeddings, UMAP/HDBSCAN clustering, and Random Forest models with 95% retrieval accuracy."
+   bullets="CLI, web, desktop apps|Optimized sequence parsing|AI motif discovery"
+   tags="AI|NGS|Bioinformatics"
+   languages="Python|C++|JavaScript|HTML|CSS"
+   frameworks="ElectronJS|AWS S3|AWS RDS|AWS Elastic Beanstalk"
+   logo="/images/capgenie_logo.svg"
+    logo_max_width_pct="60%"
+    logo_max_height="240"
+    logo_margin_top="12px"
+   request_access=true
+    cover_gallery_suffix="_capgenie"
+    cover_gallery_interval=2500
+   media_placeholder="Place CapGenie hero image here" %}
+
+{% include portfolio-section.html 
+   title="Quetz"
+   subtitle="Quantitative Ultra-short Echo-Contrast Enhanced (QUTE-CE) MRI analysis toolkit"
+   description="Quetz is QUTE-CE MRI analysis toolkit that enables fast, automated, and reproducible Blood brain barrier permeability quantification of QUTE-CE MRI data."
+   bullets="CLI toolkit|BBB permeability quantification"
+   tags="QUTE-CE|MRI|CLI"
+   languages="C++|Python"
+   repo="https://github.com/AtulPhadke/quetz"
+   request_access=true
+   cover_image_src="/images/quetZ.png"
+   cover_pan=true
+   cover_pan_duration="36s" %}
+
+{% include portfolio-section.html 
+   title="Internship Select"
+   subtitle="AI internship/job aggregator"
+   description="Internship Select aggregates and ranks internship postings with asynchronous scraping and indexing, while cached Flask APIs respond in under 200 ms to power a fast, interactive dashboard."
+   tags="Web|Dashboard|Data Viz"
+   languages="Python|JavaScript|HTML"
+   frameworks="Flask"
+   repo="https://github.com/AtulPhadke/internship-select"
+   request_access=true
+   cover_video_src="/files/internshipSelecth264.mp4" %}
+
+{% include portfolio-section.html 
+   title="DTI Conv"
+   subtitle="DTI/fMRI analysis toolkit"
+   description="DTI Conv packages C++/Python utilities and Bash automation into end‑to‑end pipelines for DTI, and fMRI increasing throughput and read accuracy by 92% at CTNI."
+   tags="Neuroimaging|Python|Tools"
+   languages="C++|Python"
+   repo="https://github.com/AtulPhadke/dti-conv"
+   request_access=true
+   hide_cover=true %}
+
+{% include portfolio-section.html 
+   title="Admission Forge"
+   subtitle="Admissions data platform"
+   description="Admission Forge is a data platform for 50+ universities that uses Python/BeautifulSoup and Wix API integrations to deliver fast, interactive admissions queries."
+   bullets="50+ universities|Python scraping|Wix APIs"
+   tags="Admissions|Productivity|Web"
+   languages="Python|JavaScript"
+   frameworks="MongoDB|Wix Velo"
+   link="https://atulphadke8.wixstudio.com/admissionforge"
+   request_access=false
+   logo="/images/admission_forge_logo.png"
+   cover_video_src="/files/admissionForgeh264.mp4" %}
+
+  </div>
+  <aside class="projects-sidebar">
+    <a href="#capgenie">capgenie</a>
+    <a href="#quetz">Quetz</a>
+    <a href="#internship-select">Internship Select</a>
+    <a href="#dti-conv">DTI Conv</a>
+    <a href="#admission-forge">Admission Forge</a>
+  </aside>
+</div>
 
