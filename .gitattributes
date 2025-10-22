@@ -1,6 +1,4 @@
 .mp4 filter=lfs diff=lfs merge=lfs -text
 .mov filter=lfs diff=lfs merge=lfs -text
-files/admissionForgeh264.mov filter=lfs diff=lfs merge=lfs -text
 files/admissionForgeh264.mp4 filter=lfs diff=lfs merge=lfs -text
 files/internshipSelecth264.mp4 filter=lfs diff=lfs merge=lfs -text
-files/internshipSelecth264.mov filter=lfs diff=lfs merge=lfs -text
