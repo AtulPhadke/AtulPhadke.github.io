@@ -23,7 +23,7 @@ repository               : "AtulPhadke/AtulPhadke.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "IMG_7318 2.HEIC"
+  avatar           : "IMG_7318.jpg"
   name             : "Atul Phadke"
   pronouns         : # example: "she/her"  
   bio              : "CS & Behavioral Neuroscience @ Northeastern. AI/ML and bioinformatics projects."
