@@ -1,0 +1,212 @@
+/* CAP-GENIE page (work/cap-genie/, js/capgenie.js) · tokens only.
+ * Extends css/project.css and css/scrolly.css. */
+
+/* ---------- Hero: the real desktop app beside the text ---------- */
+.cg-shot { margin: 0; }
+.cg-shot img,
+.cg-way img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: var(--rule-hair) solid var(--color-rule);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-rest);
+  background: var(--color-paper);
+}
+.cg-shot figcaption,
+.cg-way figcaption,
+.cg-speed figcaption {
+  margin-block-start: var(--space-xs);
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+.cg-cta { margin-block-start: var(--space-lg); }
+
+/* ---------- The pipeline scene ---------- */
+.cg-scene .scrolly__text h3 { font-size: var(--text-2xl); }
+.cg-stage {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+.cg-canvas {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+.cg-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.cg-cap {
+  flex: none;
+  margin-block-start: var(--space-xs);
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+.cg-fallback { display: block; width: 100%; height: auto; border-radius: var(--radius-md); }
+.js .cg-fallback { display: none; }
+html:not(.js) .cg-canvas { display: none; }
+html:not(.js) .cg-stage { margin-block-end: var(--space-lg); }
+
+/* every moving part eases into its state; reduced motion snaps */
+.cg-t {
+  transition-property: transform, opacity;
+  transition-duration: 700ms, 450ms;
+  transition-timing-function: var(--ease-out), var(--ease-out);
+}
+.cg-svg.no-anim .cg-t { transition: none; }
+@media (prefers-reduced-motion: reduce) {
+  .cg-t { transition: none; }
+}
+
+.cg-panel__bg { fill: var(--color-paper); }
+.cg-label {
+  font-family: var(--font-display);
+  font-variation-settings: var(--fv-display);
+  font-size: 17px;
+  font-weight: 750;
+  fill: var(--color-ink);
+}
+.cg-note {
+  font-family: var(--font-mono);
+  font-variation-settings: var(--fv-mono);
+  font-size: 13px;
+  font-weight: 500;
+  fill: var(--color-muted);
+}
+.cg-note--low { fill: var(--color-ch2-ink); font-weight: 650; }
+.cg-seq,
+.cg-chip__t,
+.cg-badge__t {
+  font-family: var(--font-mono);
+  font-variation-settings: var(--fv-mono);
+  fill: var(--color-ink);
+}
+.cg-seq { font-size: 21px; font-weight: 500; }
+.cg-chip__t { font-size: 16px; font-weight: 550; }
+.cg-badge__t { font-size: 13px; font-weight: 650; }
+
+.cg-wash--flank { fill: var(--color-ill-blue-fill); }
+.cg-wash--var { fill: var(--color-ill-pink-fill); }
+.cg-badge__bg { fill: var(--color-ill-green-fill); }
+.cg-badge.is-low .cg-badge__bg { fill: var(--color-ill-pink-fill); }
+.cg-chip__bg { fill: var(--color-paper); }
+.cg-mm { fill: var(--color-ill-amber-fill); stroke: var(--color-ill-amber); stroke-width: 1.5; }
+.cg-count {
+  font-family: var(--font-display);
+  font-variation-settings: var(--fv-display);
+  font-size: 18px;
+  font-weight: 800;
+  fill: var(--color-ch2-ink);
+}
+
+.cg-bar--input { fill: var(--color-paper-3); stroke: var(--color-ink-2); stroke-width: 1.2; }
+.cg-bar--brain { fill: var(--color-ill-pink-fill); stroke: var(--color-ch2); stroke-width: 1.4; }
+.cg-bar { transform-box: fill-box; transform-origin: left center; }
+.cg-fold {
+  font-family: var(--font-display);
+  font-variation-settings: var(--fv-display);
+  font-size: 18px;
+  font-weight: 800;
+  fill: var(--color-muted);
+}
+.cg-fold.is-up { fill: var(--color-ch2-ink); }
+
+/* ---------- Speed: reads split across threads ---------- */
+.cg-speed { margin: 0; }
+.cg-speed__box {
+  padding: var(--space-sm);
+  border: var(--rule-hair) solid var(--color-rule);
+  border-radius: var(--radius-md);
+  background: var(--color-paper);
+}
+.cg-speed__svg { display: block; width: 100%; height: auto; }
+.cg-speed figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+}
+.cg-file__bg { fill: var(--color-ill-blue-fill); stroke: var(--color-ink); stroke-width: 1.6; stroke-linejoin: round; }
+.cg-file__edge { fill: none; stroke: var(--color-ink); stroke-width: 1.6; stroke-linejoin: round; }
+.cg-file__line { stroke: var(--color-ch1); stroke-width: 2.4; stroke-linecap: round; }
+.cg-fan { fill: none; stroke: var(--color-rule); stroke-width: 1.4; }
+.cg-lane { stroke: var(--color-rule); stroke-width: 1.4; stroke-dasharray: 3 5; stroke-linecap: round; }
+.cg-tick { fill: var(--color-ill-pink-fill); stroke: var(--color-ch2); stroke-width: 1.4; }
+.cg-res__bg { fill: var(--color-paper); stroke: var(--color-ch2); stroke-width: 1.6; }
+.cg-res__n {
+  font-family: var(--font-display);
+  font-variation-settings: var(--fv-display);
+  font-size: 36px;
+  font-weight: 850;
+  fill: var(--color-ch2-ink);
+}
+
+/* ---------- Three ways to run it ---------- */
+.cg-ways {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-lg);
+  margin-block-start: var(--space-xl);
+}
+@media (min-width: 60rem) {
+  .cg-ways { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.cg-way {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: var(--space-md);
+  border: var(--rule-hair) solid var(--color-rule);
+  border-radius: var(--radius-md);
+  background: var(--color-paper);
+}
+.cg-way h3 {
+  margin-block-end: var(--space-sm);
+  font-size: var(--text-xl);
+}
+.cg-way pre {
+  flex: 1 1 auto;
+  margin: 0;
+  padding: var(--space-sm) var(--space-md);
+  overflow-x: auto;
+  border: var(--rule-hair) solid var(--color-rule);
+  border-radius: var(--radius-sm);
+  background: var(--color-paper-2);
+  font-family: var(--font-mono);
+  font-variation-settings: var(--fv-mono);
+  font-size: var(--text-md);
+  line-height: 1.8;
+  color: var(--color-ink);
+}
+/* the code block matches the screenshot's height beside it; keep the code centred in it */
+@media (min-width: 60rem) {
+  .cg-way pre { display: flex; align-items: center; }
+}
+.cg-way img { box-shadow: none; }
+.cg-way figcaption { margin-block-start: var(--space-sm); }
+.cg-way figcaption a { color: var(--color-ch1-ink); font-weight: 600; }
+
+/* ---------- How it's built ---------- */
+.cg-arch { margin: 0; }
+.cg-arch__svg { display: block; width: 100%; height: auto; overflow: visible; }
+/* keep the labels readable over the hatching */
+.cg-arch__svg .r-hg,
+.cg-arch__svg .r-hb,
+.cg-arch__svg .r-ha { opacity: 0.35; }
+
+/* ---------- The paper ---------- */
+.cg-paper {
+  margin-block-start: var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
+  border: var(--rule-hair) solid var(--color-ch2);
+  border-radius: var(--radius-md);
+  background: var(--color-paper);
+}
+.cg-paper h3 { font-size: var(--text-lg); }
+.cg-paper p { margin-block-start: var(--space-2xs); max-width: 80ch; color: var(--color-ink-2); }
+.cg-paper cite { font-style: normal; font-weight: 650; color: var(--color-ink); }

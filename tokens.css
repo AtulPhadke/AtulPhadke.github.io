@@ -1,0 +1,79 @@
+/* Atul Phadke portfolio · design tokens (Hallmark contract).
+ * Every colour and font in css/site.css references these. Canvas JS reads the
+ * channel colours from here via getComputedStyle.
+ */
+
+/* Canvas can't set variation axes, so the hero lanes use a static Recursive
+ * Mono instance (wght 500, MONO 1), subset to the few glyphs they draw. */
+@font-face {
+  font-family: "Recursive Lanes";
+  src: url("assets/fonts/recursive-mono-lanes.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* paper / ink — tinted toward hue 235–262, never pure #fff/#000 */
+  --color-paper:   oklch(97% 0.010 235);   /* #eff6fb */
+  --color-paper-2: oklch(94% 0.014 235);   /* #e3edf3  alt band / card body */
+  --color-paper-3: oklch(90.5% 0.018 238); /* #d5e2ea  pressed / wells */
+  --color-ink:     oklch(23% 0.035 262);   /* #141d2d  15.5:1 on paper */
+  --color-ink-2:   oklch(40% 0.030 262);   /* #3f4858  8.5:1 */
+  --color-muted:   oklch(49% 0.025 255);   /* #57616f  5.7:1 — smallest text allowed */
+  --color-rule:    oklch(84% 0.018 240);   /* decorative hairlines only (1.5:1) */
+  --color-rule-2:  oklch(91% 0.014 240);   /* graticule minor lines */
+  --color-control-border: var(--color-ink-2); /* interactive borders need >= 3:1 */
+
+  /* channels — trace colours (>=3:1 non-text) and text-safe inks (>=6:1) */
+  --color-ch1:     oklch(54% 0.16 262);    /* #3769ca systems blue — traces, dots, fills */
+  --color-ch1-ink: oklch(48% 0.16 262);    /* #2757b6 text-safe 6.2:1 */
+  --color-ch1-wash:oklch(93% 0.035 262);   /* chip background */
+  --color-ch2:     oklch(62% 0.16 355);    /* #cd568b biology pink — traces, dots, fills */
+  --color-ch2-ink: oklch(50% 0.16 355);    /* #a43068 text-safe 6.0:1 */
+  --color-ch2-wash:oklch(94% 0.03 355);    /* chip background */
+  --color-focus:   oklch(52% 0.19 262);    /* 5.2:1 ring */
+
+  /* illustration only (hand-drawn GPU, sketches) — Excalidraw-style pastels
+   * under mid-tone hachure strokes; never used for text */
+  --color-ill-blue:        var(--color-ch1);
+  --color-ill-blue-fill:   oklch(87% 0.055 250);
+  --color-ill-pink:        var(--color-ch2);
+  --color-ill-pink-fill:   oklch(89% 0.05 355);
+  --color-ill-amber:       oklch(76% 0.14 78);
+  --color-ill-amber-fill:  oklch(94% 0.07 92);
+  --color-ill-green:       oklch(63% 0.13 152);
+  --color-ill-green-fill:  oklch(92% 0.06 152);
+  --color-on-ink:  var(--color-paper);     /* text on ink-filled buttons */
+
+  --shadow-lift: 0 10px 28px -14px oklch(23% 0.035 262 / 0.35);
+  --shadow-rest: 0 1px 0 oklch(23% 0.035 262 / 0.06);
+
+  /* type — single variable family, three voices via axes */
+  --font-display: "Recursive", ui-rounded, sans-serif;  /* CASL 1, wght 750–900 */
+  --font-body:    "Recursive", ui-sans-serif, sans-serif; /* CASL 0, wght 400 */
+  --font-mono:    "Recursive", ui-monospace, monospace;  /* MONO 1, CASL 0 */
+  --font-lanes:   "Recursive Lanes", ui-monospace, monospace; /* canvas only */
+  --fv-display: "CASL" 1, "MONO" 0, "slnt" 0;
+  --fv-body:    "CASL" 0, "MONO" 0, "slnt" 0;
+  --fv-mono:    "CASL" 0, "MONO" 1, "slnt" 0;
+
+  /* scale (major third-ish, fluid at the top) */
+  --text-xs: 0.8125rem; --text-sm: 0.9375rem; --text-md: 1.0625rem; --text-lg: 1.25rem;
+  --text-xl: 1.5625rem; --text-2xl: 2rem; --text-3xl: clamp(2.25rem, 4vw + 1rem, 3.5rem);
+  --text-display: clamp(3.25rem, min(12.5vw, 18svh), 9.5rem); /* capped by height so short laptops keep the lanes in the fold */
+
+  /* 4pt spacing */
+  --space-3xs: 0.25rem; --space-2xs: 0.5rem; --space-xs: 0.75rem; --space-sm: 1rem;
+  --space-md: 1.5rem; --space-lg: 2rem; --space-xl: 3rem; --space-2xl: 4rem; --space-3xl: 6rem; --space-4xl: 8rem;
+
+  --radius-sm: 6px; --radius-md: 12px; --radius-pill: 999px;
+  --rule-hair: 1px; --rule-slab: 2px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in: cubic-bezier(0.55, 0, 1, 0.45);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 150ms; --dur-base: 240ms; --dur-slow: 480ms; --dur-sweep: 1100ms;
+
+  --measure: 64ch; --page-max: 76rem; --gutter: clamp(1rem, 4vw, 2.5rem);
+}

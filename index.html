@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Atul Phadke — agentic GPU infrastructure and genetics software</title>
+  <meta name="description" content="Atul Phadke builds agentic GPU schedulers and sequencing software for gene therapy research. CS and behavioral neuroscience at Northeastern.">
+  <link rel="canonical" href="https://atulphadke.github.io/">
+  <meta name="theme-color" content="#eff6fb">
+  <meta name="author" content="Atul Phadke">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Atul Phadke">
+  <meta property="og:title" content="Atul Phadke — agentic GPU infrastructure and genetics software">
+  <meta property="og:description" content="I build agentic GPU schedulers and sequencing software for gene therapy research.">
+  <meta property="og:url" content="https://atulphadke.github.io/">
+  <meta property="og:image" content="https://atulphadke.github.io/assets/og.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Atul Phadke — agentic GPU infrastructure and genetics software">
+  <meta name="twitter:description" content="I build agentic GPU schedulers and sequencing software for gene therapy research.">
+  <meta name="twitter:image" content="https://atulphadke.github.io/assets/og.png">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Recursive:wght,CASL,MONO@300..1000,0..1,0..1&amp;display=swap">
+
+  <link rel="stylesheet" href="tokens.css?v=20260927i">
+  <link rel="stylesheet" href="css/site.css?v=20260927i">
+  <link rel="stylesheet" href="css/rig.css?v=20260927i">
+
+  <script>
+    document.documentElement.classList.add('js');
+    /* Safety net: if site.js never runs, reveal the hero anyway. */
+    setTimeout(function () {
+      var s = document.querySelector('.scope');
+      if (s) s.classList.add('is-ready');
+    }, 3000);
+  </script>
+  <script src="js/rig-art.js?v=20260927i" defer></script>
+  <script src="js/site.js?v=20260927i" defer></script>
+  <script src="js/rig.js?v=20260927i" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Atul Phadke",
+    "url": "https://atulphadke.github.io/",
+    "email": "mailto:phadke.at@northeastern.edu",
+    "sameAs": [
+      "https://github.com/AtulPhadke",
+      "https://www.linkedin.com/in/atul-phadke8/"
+    ],
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "Northeastern University"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-head">
+    <nav class="nav wrap" aria-label="Primary">
+      <a class="nav__wordmark" href="#top">Atul Phadke</a>
+      <button class="nav__toggle js-only" type="button" aria-expanded="false" aria-controls="nav-menu">Menu</button>
+      <div class="nav__menu" id="nav-menu">
+        <ul class="nav__links" role="list">
+          <li><a class="nav__link" href="#work">Work</a></li>
+          <li><a class="nav__link" href="#contact">Contact</a></li>
+        </ul>
+        <a class="btn btn--ink nav__cta" href="mailto:phadke.at@northeastern.edu">Email me</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main" tabindex="-1">
+
+    <!-- Hero: the scope -->
+    <section class="scope" id="top" aria-labelledby="hero-name">
+      <div class="scope__body wrap">
+        <div class="hero__text">
+          <h1 class="hero__name" id="hero-name"><span class="hero__line">Atul</span> <span class="hero__line">Phadke</span></h1>
+          <p class="hero__lede">I build agentic GPU schedulers and sequencing software for gene therapy research.</p>
+          <p class="hero__sub">Computer science and behavioral neuroscience at Northeastern, graduating May&nbsp;2028. Right now I&rsquo;m building MLbroker, where Claude agents decide which GPU each job gets.</p>
+        </div>
+
+        <div class="hero__rig js-only">
+          <!-- MLbroker at work: queue, agent, safety check, GPUs (js/rig.js) -->
+          <div class="rig" data-rig aria-hidden="true"></div>
+          <div class="rig__caption">
+            <button class="btn btn--outline run" type="button" data-run data-state="running">
+              <span class="run__glyph" aria-hidden="true"></span>
+              <span class="run__labels">
+                <span class="run__label" data-for="running">Pause</span>
+                <span class="run__label" data-for="stopped">Play</span>
+              </span>
+            </button>
+            <a class="btn btn--ink" href="work/mlbroker/">Learn more about MLbroker</a>
+            <p>A simulation of how MLbroker decides. Jobs and prices are made up; the rules are the real ones.</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Work -->
+    <section class="section work" id="work" aria-labelledby="work-h">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2 id="work-h">Selected work</h2>
+            <p class="section-head__line">GPU infrastructure, and the tools I built for sequencing and mass spec.</p>
+          </div>
+        </div>
+
+        <div class="work-grid">
+          <article class="work-card work-card--featured" data-channel="systems" data-seed="11">
+            <figure class="work-card__media work-card__media--plain"></figure>
+            <h3 class="work-card__title"><a class="work-card__link" href="work/mlbroker/">MLbroker</a></h3>
+            <p class="work-card__context">Personal project, in progress</p>
+            <p class="work-card__tags"><span class="tag tag--systems"><span class="tag__sq" aria-hidden="true"></span>Systems</span></p>
+            <ol class="parts" aria-label="A two-part build">
+              <li><span class="parts__n">Part 1</span> Priority GPU scheduler, Matterworks.ai, 2026</li>
+              <li><span class="parts__n">Part 2</span> MLbroker, now</li>
+            </ol>
+            <p class="work-card__desc">At Matterworks I built a priority scheduler on Kueue, with preemption, quotas, and priority-driven deployment across dozens of GPUs. The rules worked. The problem was that the right priority changed every week. MLbroker is part two: Claude agents place, preempt, and defer jobs across spot, on-demand, and on-prem GPUs under a spend cap, and every decision passes a deterministic safety check before it runs.</p>
+            <ul class="stack" aria-label="Stack">
+              <li>Python</li><li>Rust</li><li>Kueue</li><li>SkyPilot</li><li>Kubernetes</li><li>Claude</li>
+            </ul>
+          </article>
+
+          <article class="work-card" data-channel="both" data-seed="23">
+            <figure class="work-card__media work-card__media--plain work-card__media--logo">
+              <img src="assets/work/cap-genie/logo.svg" alt="" width="844" height="319">
+            </figure>
+            <h3 class="work-card__title"><a class="work-card__link" href="work/cap-genie/">CAP-GENIE</a></h3>
+            <p class="work-card__context">Mass General Hospital, 2024–2025</p>
+            <p class="work-card__tags"><span class="tag tag--systems"><span class="tag__sq" aria-hidden="true"></span>Systems</span><span class="tag tag--biology"><span class="tag__sq" aria-hidden="true"></span>Biology</span></p>
+            <p class="work-card__desc">An open-source suite for analyzing sequencing data from AAV vector selections and screens, shipped as CLI, web, and desktop apps. Cython sequence parsing and multithreaded C++ modules with OpenMP process over 2M reads per second. Manuscript in review at Nature Communications.</p>
+            <ul class="stack" aria-label="Stack">
+              <li>Python</li><li>C++</li><li>Cython</li><li>OpenMP</li><li>Electron</li><li>Flask</li><li>AWS</li>
+            </ul>
+          </article>
+
+          <article class="work-card" data-channel="biology" data-seed="41">
+            <figure class="work-card__media work-card__media--plain">
+              <img src="assets/work/lc-ms-featurization/card.svg" alt="" width="480" height="300">
+            </figure>
+            <h3 class="work-card__title"><a class="work-card__link" href="work/lc-ms-featurization/">LC-MS featurization</a></h3>
+            <p class="work-card__context">Matterworks.ai, 2026</p>
+            <p class="work-card__tags"><span class="tag tag--biology"><span class="tag__sq" aria-hidden="true"></span>Biology</span></p>
+            <p class="work-card__desc">A C++/Python algorithm that links MS2 spectra to MS1 peak-shaped features. It detects 5&times; more lipid analytes than the industry tools MZmine and MS-DIAL.</p>
+            <ul class="stack" aria-label="Stack">
+              <li>C++</li><li>Python</li>
+            </ul>
+          </article>
+
+          <article class="work-card work-card--featured" data-channel="systems" data-seed="17">
+            <figure class="work-card__media work-card__media--plain">
+              <img src="assets/work/devserver-slack/card.svg" alt="" width="860" height="320">
+            </figure>
+            <h3 class="work-card__title"><a class="work-card__link" href="work/devserver-slack/">Devserver provisioning in Slack</a></h3>
+            <p class="work-card__context">Matterworks.ai, 2026. Co-developed.</p>
+            <p class="work-card__tags"><span class="tag tag--systems"><span class="tag__sq" aria-hidden="true"></span>Systems</span></p>
+            <p class="work-card__desc">A Slack app that provisions AWS EC2 devservers with shared EFS storage and shows live per-instance demand, so scientists can schedule experiments around availability. It became the standard compute workflow across the company.</p>
+            <ul class="stack" aria-label="Stack">
+              <li>Slack API</li><li>Boto3</li><li>Terraform</li><li>EC2</li><li>EFS</li>
+            </ul>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Contact -->
+  <footer class="site-foot" id="contact" aria-labelledby="contact-h">
+    <div class="wrap">
+      <h2 class="foot__statement" id="contact-h">Hiring for GPU infrastructure, or running a genetics lab that needs better software? Say hello.</h2>
+
+      <div class="foot__email-row">
+        <a class="foot__email" href="mailto:phadke.at@northeastern.edu" data-email>phadke.at@northeastern.edu</a>
+        <button class="btn btn--outline copy js-only" type="button" data-copy="phadke.at@northeastern.edu" data-state="idle">
+          <span class="copy__label" data-for="idle">Copy</span>
+          <span class="copy__label" data-for="copied">Copied</span>
+        </button>
+        <span class="sr-only" aria-live="polite" data-copy-status></span>
+      </div>
+
+      <ul class="foot__links" role="list">
+        <li><a href="https://github.com/AtulPhadke" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/atul-phadke8/" rel="noopener">LinkedIn</a></li>
+      </ul>
+
+      <div class="foot__meta">
+        <p>&copy; 2026 Atul Phadke. Boston, MA.</p>
+        <p>Designed and built by hand. No frameworks.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

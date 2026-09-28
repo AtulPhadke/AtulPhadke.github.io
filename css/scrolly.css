@@ -1,0 +1,99 @@
+/* Scroll-driven scenes (js/scrolly.js) · tokens only.
+ *
+ *   <section class="scrolly" data-scrolly="name">
+ *     <div class="scrolly__stage">…pinned figure…</div>
+ *     <ol class="scrolly__steps">
+ *       <li class="scrolly__step" data-step="a"><div class="scrolly__text">…</div></li>
+ *     </ol>
+ *   </section>
+ *
+ * Wide: steps on the left, the stage pinned on the right (.scrolly--stage-left flips it).
+ * Narrow: the stage pins to the top and the step cards scroll up over its lower edge.
+ * No JS: the stage shows its finished state and the steps read as a plain list. */
+
+.scrolly {
+  --scrolly-top: calc(var(--nav-h) + var(--space-md));
+  position: relative;
+}
+.scrolly__steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.scrolly__step + .scrolly__step { margin-block-start: var(--space-lg); }
+.scrolly__text {
+  max-width: 34ch;
+  font-size: var(--text-lg);
+  line-height: 1.5;
+  color: var(--color-ink-2);
+}
+.scrolly__text h3 {
+  margin-block-end: var(--space-2xs);
+  font-size: var(--text-xl);
+  line-height: 1.15;
+  color: var(--color-ink);
+}
+.scrolly__stage { position: relative; }
+
+.js .scrolly.is-scrolly .scrolly__step {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 78svh;
+  margin: 0;
+  opacity: 0.28;
+}
+.js .scrolly.is-scrolly .scrolly__step:first-child { min-height: 60svh; }
+.js .scrolly.is-scrolly .scrolly__step:last-child { min-height: 90svh; }
+.js .scrolly.is-scrolly .scrolly__step.is-active { opacity: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  .js .scrolly.is-scrolly .scrolly__step { transition: opacity var(--dur-base) var(--ease-out); }
+}
+
+/* narrow: stage on top, steps as cards that pass over its lower edge */
+.js .scrolly.is-scrolly .scrolly__stage {
+  position: sticky;
+  top: var(--scrolly-top);
+  z-index: 0;
+  height: min(56svh, 30rem);
+}
+.js .scrolly.is-scrolly .scrolly__steps {
+  position: relative;
+  z-index: 1;
+  margin-block-start: calc(-1 * min(22svh, 12rem));
+}
+.js .scrolly.is-scrolly .scrolly__text {
+  padding: var(--space-sm) var(--space-md);
+  border: var(--rule-hair) solid var(--color-rule);
+  border-radius: var(--radius-md);
+  background: var(--color-paper);
+}
+/* a card that has scrolled past would sit faded over the pinned stage */
+@media (max-width: 59.99rem) {
+  .js .scrolly.is-scrolly .scrolly__step.is-past { opacity: 0; }
+}
+
+@media (min-width: 60rem) {
+  .scrolly {
+    display: grid;
+    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+  .scrolly__steps { grid-column: 1; grid-row: 1; }
+  .scrolly__stage { grid-column: 2; grid-row: 1; }
+  .scrolly--stage-left { grid-template-columns: minmax(0, 1.28fr) minmax(0, 0.72fr); }
+  .scrolly--stage-left .scrolly__steps { grid-column: 2; }
+  .scrolly--stage-left .scrolly__stage { grid-column: 1; }
+
+  .js .scrolly.is-scrolly .scrolly__stage {
+    height: calc(100svh - var(--nav-h) - var(--space-md) * 2);
+    max-height: 48rem;
+  }
+  .js .scrolly.is-scrolly .scrolly__steps { margin-block-start: 0; }
+  .js .scrolly.is-scrolly .scrolly__text {
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+}

@@ -1,0 +1,279 @@
+/* MLbroker project page · the decision-loop scroll scene (js/mlbroker.js) · tokens only.
+ * Loads after css/project.css and css/scrolly.css. The rest of the page uses
+ * css/project.css as is. Without JS the drawing is a static figure and the
+ * three steps read as a list. */
+
+/* ---------- Scene layout (overrides css/scrolly.css for this scene) ---------- */
+@media (min-width: 60rem) {
+  .ml-scene {
+    grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.38fr);
+    gap: var(--space-xl);
+  }
+}
+.ml-h2 {
+  margin-block-end: var(--space-xs);
+  font-size: clamp(2rem, 1.2rem + 2.2vw, 3.1rem);
+  line-height: 1.05;
+  color: var(--color-ink);
+}
+.ml-scene .scrolly__text p + h3 { margin-block-start: var(--space-lg); }
+.ml-n {
+  display: inline-grid;
+  place-items: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  margin-inline-end: var(--space-2xs);
+  border: var(--rule-slab) solid var(--color-ill-green);
+  border-radius: 50%;
+  background: var(--color-ill-green-fill);
+  font-family: var(--font-mono);
+  font-variation-settings: var(--fv-mono);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  vertical-align: 0.15em;
+  color: var(--color-ink);
+}
+
+/* ---------- The stage: a paper sheet with a small foot ---------- */
+.ml-stage {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-sm);
+  border: var(--rule-hair) solid var(--color-rule);
+  border-radius: var(--radius-md);
+  background: var(--color-paper);
+  box-shadow: var(--shadow-rest);
+}
+.js .scrolly.is-scrolly .ml-stage { contain: layout paint; }
+.ml-stage__foot {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs) var(--space-md);
+  min-height: 44px;
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+.ml-stage__foot p { max-width: 60ch; margin: 0; }
+
+/* ---------- Camera over the drawing ---------- */
+.loop {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  flex: 1 1 auto;
+  min-height: 0;
+  margin: 0;
+}
+.loop__view { position: relative; flex: 1 1 auto; min-height: 0; }
+.loop__img { width: 100%; height: auto; }
+.loop.is-live .loop__view { overflow: hidden; border-radius: var(--radius-sm); }
+.loop.is-live .loop__world {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  width: 889px;
+  height: 777px;
+  transform-origin: 0 0;
+}
+.loop.is-live.is-moving .loop__world { transition: transform 1000ms var(--ease-in-out); }
+.loop.is-live .loop__img { width: 889px; height: 777px; max-width: none; }
+.loop__dim,
+.loop__fx {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.loop__dim path {
+  fill: color-mix(in oklch, var(--color-paper) 80%, transparent);
+  fill-rule: evenodd;
+  opacity: 0;
+  transition: opacity 700ms var(--ease-out);
+}
+.loop__dim path.is-on { opacity: 1; }
+
+/* ---------- Overlays, in drawing coordinates ---------- */
+.fx { opacity: 0; transition: opacity var(--dur-slow) var(--ease-out); }
+.fx.is-on { opacity: 1; }
+.fx-frame path { vector-effect: non-scaling-stroke; }
+.fx-card { fill: var(--color-paper-2); }
+.fx-card-t {
+  font-family: var(--font-display);
+  font-variation-settings: var(--fv-display);
+  font-size: 11.5px;
+  font-weight: 700;
+  fill: var(--color-ink);
+}
+.fx-small {
+  font-family: var(--font-mono);
+  font-variation-settings: var(--fv-mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  fill: var(--color-ink-2);
+}
+.fx-meter { fill: var(--color-rule-2); stroke: var(--color-ink); stroke-width: 0.8; }
+.fx-meter-fill { fill: var(--color-ch1); }
+.fx-meter-fill.is-warn { fill: var(--color-ill-amber); }
+.fx-meter-soft { stroke: var(--color-ink); stroke-width: 1.2; stroke-dasharray: 2 2; }
+.fx-meter-hard { stroke: var(--color-ink); stroke-width: 2.2; }
+.fx-radar { fill: color-mix(in oklch, var(--color-ch1) 18%, transparent); stroke: var(--color-ch1); stroke-width: 1.8; stroke-linejoin: round; }
+.fx-cursor { stroke: var(--color-ch1); stroke-width: 1.6; stroke-dasharray: 3 3; }
+.fx-pulse { fill: none; stroke: var(--color-ill-green); stroke-width: 2; }
+.fx-glow { fill: none; stroke: var(--color-ch2); stroke-width: 2.4; stroke-linecap: round; stroke-dasharray: 3 7; }
+.fx-dot { fill: var(--color-ink-2); }
+.fx-led { fill: var(--color-ill-green); stroke: var(--color-ink); stroke-width: 0.8; }
+.fx-led.is-bad { fill: var(--color-ch2); }
+.fx-chip rect { fill: var(--color-paper); stroke: var(--color-ink); stroke-width: 1.2; }
+.fx-chip text {
+  font-family: var(--font-body);
+  font-variation-settings: var(--fv-body);
+  font-size: 10px;
+  font-weight: 650;
+  fill: var(--color-ink);
+}
+.fx-chip--bad rect { stroke: var(--color-ch2); fill: var(--color-ch2-wash); }
+.fx-chip--bad text { fill: var(--color-ch2-ink); }
+.fx-chip--place rect { stroke: var(--color-ch1); fill: var(--color-ch1-wash); }
+.fx-chip--place text { fill: var(--color-ch1-ink); }
+.fx-packet[data-state="fail"] .r-paper { fill: var(--color-ch2-wash); }
+.fx-packet[data-state="pass"] .r-paper { fill: var(--color-ill-green-fill); }
+
+/* ---------- Callouts: stage-space cards with the live details ---------- */
+.loop__callouts { position: absolute; inset: 0; pointer-events: none; }
+.co {
+  position: absolute;
+  z-index: 1;
+  isolation: isolate;
+  width: min(19.5rem, 56%);
+  padding: var(--space-xs) var(--space-sm) var(--space-sm);
+  color: var(--color-ink);
+  font-size: var(--text-sm);
+  line-height: 1.35;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out);
+}
+.co.is-on { opacity: 1; transform: none; transition-delay: 350ms; }
+/* the proposed moves are already on the card when Decision starts; only the checks animate */
+.co--moves { transition: none; transform: none; }
+.co[data-at="bl"] { inset-inline-start: var(--space-xs); inset-block-end: var(--space-xs); }
+.co[data-at="tl"] { inset-inline-start: var(--space-xs); inset-block-start: var(--space-xs); }
+.co[data-at="tr"] { inset-inline-end: var(--space-xs); inset-block-start: var(--space-xs); }
+.co__frame {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.co__frame rect { fill: var(--color-paper); }
+.co__frame path { vector-effect: non-scaling-stroke; }
+.co__title {
+  margin: 0 0 var(--space-2xs);
+  font-family: var(--font-display);
+  font-variation-settings: var(--fv-display);
+  font-size: var(--text-md);
+  font-weight: 750;
+}
+.co__note { margin: var(--space-2xs) 0 0; font-size: var(--text-xs); color: var(--color-muted); }
+
+/* the admin's note */
+.co--note {
+  padding: var(--space-sm) var(--space-md);
+  border: var(--rule-hair) solid var(--color-ink);
+  border-radius: 4px;
+  background: var(--color-ill-amber-fill);
+  box-shadow: 3px 4px 0 var(--color-rule);
+}
+.co--note.is-on { transform: rotate(-1.4deg); }
+.co--note::before {
+  content: "";
+  position: absolute;
+  inset-block-start: -7px;
+  inset-inline-start: 50%;
+  width: 14px;
+  height: 14px;
+  margin-inline-start: -7px;
+  border: var(--rule-hair) solid var(--color-ink);
+  border-radius: 50%;
+  background: var(--color-ch2);
+}
+.co--note blockquote { margin: 0; }
+.co--note blockquote p {
+  margin: 0;
+  font-family: var(--font-display);
+  font-variation-settings: var(--fv-display);
+  font-size: var(--text-lg);
+  font-weight: 650;
+  line-height: 1.35;
+}
+.co--note mark {
+  padding: 0 0.1em;
+  color: inherit;
+  background: linear-gradient(var(--color-ch1-wash), var(--color-ch1-wash)) no-repeat 0 90% / 0% 45%;
+  transition: background-size 600ms var(--ease-out);
+}
+.co--note mark.is-on { background-size: 100% 45%; }
+.co--note mark.is-down { background-image: linear-gradient(var(--color-ch2-wash), var(--color-ch2-wash)); }
+.co--note footer { margin-block-start: var(--space-2xs); font-size: var(--text-xs); color: var(--color-ink-2); }
+
+/* proposed moves, each with its verdict */
+.co__moves { display: grid; gap: 0.3rem; margin: 0; padding: 0; list-style: none; }
+.co__moves li { display: grid; grid-template-columns: 5.4rem minmax(0, 1fr) 1.2rem; align-items: baseline; gap: var(--space-2xs); }
+.co__moves b {
+  font-family: var(--font-mono);
+  font-variation-settings: var(--fv-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--color-ch1-ink);
+}
+.co__moves span { color: var(--color-ink-2); }
+.co__verdict { display: block; width: 1.2rem; height: 1.2rem; align-self: center; opacity: 0; }
+.co__verdict svg { width: 100%; height: 100%; overflow: visible; }
+.co__failc { fill: var(--color-ch2-wash); stroke: var(--color-ch2); stroke-width: 1.4; }
+.co__moves li.is-fail > span:nth-child(2) { color: var(--color-ch2-ink); text-decoration: line-through; text-decoration-color: var(--color-ch2); }
+.co__moves .co__why { grid-column: 2 / -1; font-size: var(--text-xs); font-weight: 650; color: var(--color-ch2-ink); visibility: hidden; }
+.co__moves li.is-fail .co__why { visibility: visible; }
+
+/* stats coming back */
+.co--stats { width: min(17.5rem, 46%); }
+.co__rows { display: grid; gap: 0.3rem; }
+.co__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: var(--space-xs);
+}
+.co__row > span { color: var(--color-ink-2); }
+.co__row b {
+  font-family: var(--font-mono);
+  font-variation-settings: var(--fv-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink);
+}
+.co__row b.is-bad { color: var(--color-ch2-ink); }
+.co__spark { display: block; width: 100%; height: 2.6rem; margin-block-start: var(--space-2xs); overflow: visible; }
+.co__spark .sp-line { fill: none; stroke: var(--color-ch1); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.co__spark .sp-axis { stroke: var(--color-rule); stroke-width: 1; }
+.co__spark .sp-dot { fill: var(--color-ch1); stroke: var(--color-paper); stroke-width: 1.5; }
+
+/* ---------- Part 1: the cluster sketch · Part 2: the job-cycle drawing ---------- */
+.project-panel .ml-cycle,
+.project-panel .ml-cluster { margin-block: var(--space-md) 0; }
+.ml-cluster__svg { display: block; width: 100%; height: auto; overflow: visible; }
+.ml-cluster figcaption { margin-block-start: var(--space-xs); font-size: var(--text-sm); color: var(--color-muted); }
+
+/* ---------- Narrow screens: the stage pins on top, cards pass under ---------- */
+@media (max-width: 59.99rem) {
+  .ml-scene .scrolly__stage { margin-block-end: var(--space-md); }
+  .js .scrolly.is-scrolly.ml-scene .ml-stage { padding: var(--space-2xs); }
+  .ml-stage__foot { min-height: 0; font-size: var(--text-xs); }
+  .ml-stage__foot p { display: none; }
+  .loop__callouts { display: none; }
+}

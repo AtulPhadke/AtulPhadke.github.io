@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>CAP-GENIE — Atul Phadke</title>
+  <meta name="description" content="An open-source toolkit for sequencing data from AAV capsid selections and screens, as a command-line tool and a web app. Over 2 million reads per second.">
+  <link rel="canonical" href="https://atulphadke.github.io/work/cap-genie/">
+  <meta name="theme-color" content="#eff6fb">
+  <meta name="author" content="Atul Phadke">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Atul Phadke">
+  <meta property="og:title" content="CAP-GENIE — Atul Phadke">
+  <meta property="og:description" content="An open-source toolkit for sequencing data from AAV capsid selections and screens, as a command-line tool and a web app.">
+  <meta property="og:url" content="https://atulphadke.github.io/work/cap-genie/">
+  <meta property="og:image" content="https://atulphadke.github.io/assets/og.png">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="icon" href="/assets/favicon.svg?v=20260927i" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Recursive:wght,CASL,MONO@300..1000,0..1,0..1&amp;display=swap">
+
+  <link rel="stylesheet" href="/tokens.css?v=20260927i">
+  <link rel="stylesheet" href="/css/site.css?v=20260927i">
+  <link rel="stylesheet" href="/css/rig.css?v=20260927i">
+  <link rel="stylesheet" href="/css/project.css?v=20260927i">
+  <link rel="stylesheet" href="/css/scrolly.css?v=20260927i">
+  <link rel="stylesheet" href="/css/capgenie.css?v=20260927i">
+
+  <script>document.documentElement.classList.add('js');</script>
+  <script src="/js/capgenie-art.js?v=20260927i" defer></script>
+  <script src="/js/site.js?v=20260927i" defer></script>
+  <script src="/js/scrolly.js?v=20260927i" defer></script>
+  <script src="/js/capgenie.js?v=20260927i" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-head">
+    <nav class="nav wrap" aria-label="Primary">
+      <a class="nav__wordmark" href="/">Atul Phadke</a>
+      <button class="nav__toggle js-only" type="button" aria-expanded="false" aria-controls="nav-menu">Menu</button>
+      <div class="nav__menu" id="nav-menu">
+        <ul class="nav__links" role="list">
+          <li><a class="nav__link" href="/#work">Work</a></li>
+          <li><a class="nav__link" href="#contact">Contact</a></li>
+        </ul>
+        <a class="btn btn--ink nav__cta" href="mailto:phadke.at@northeastern.edu">Email me</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <article>
+      <header class="project-hero project-hero--split wrap">
+        <div>
+          <a class="project-back" href="/#work"><span aria-hidden="true">&larr;</span> All work</a>
+          <h1 class="project-title">CAP-GENIE</h1>
+          <p class="project-context">Mass General Hospital, Gene and Cell Therapy Institute, 2024&ndash;2025</p>
+          <p class="work-card__tags"><span class="tag tag--systems"><span class="tag__sq" aria-hidden="true"></span>Systems</span><span class="tag tag--biology"><span class="tag__sq" aria-hidden="true"></span>Biology</span></p>
+          <p class="project-status">Manuscript in review at Nature Communications</p>
+          <p class="project-summary">An open-source toolkit for sequencing data from AAV capsid selections and screens. It finds every capsid variant in millions of reads, cleans out sequencing errors, and shows which variants grew against the input library.</p>
+          <ul class="stack" aria-label="Stack"><li>Python</li><li>C++</li><li>Cython</li><li>OpenMP</li><li>JavaScript</li><li>Flask</li><li>Electron</li><li>Heroku</li><li>AWS</li></ul>
+          <p class="cg-cta"><a class="btn btn--ink" href="https://capgenie-a06c8d2f455a.herokuapp.com/" rel="noopener">Open the web app</a></p>
+        </div>
+        <figure class="cg-shot">
+          <img src="/assets/work/cap-genie/quality.webp?v=20260927i" width="1600" height="900" alt="The capgenie desktop app showing quality analysis for a dataset named mouse_data: an average quality score of 36.208, 4,218,350 reads analyzed, a quality distribution chart, and bars of low-quality reads per file.">
+          <figcaption>The desktop app&rsquo;s quality view.</figcaption>
+        </figure>
+      </header>
+
+      <section class="chapter chapter--tint" aria-labelledby="cg-how">
+        <div class="wrap">
+          <h2 id="cg-how" class="sr-only">How it works</h2>
+          <div class="scrolly cg-scene" data-scrolly="pipeline">
+            <figure class="scrolly__stage cg-stage">
+              <div class="cg-canvas" data-cg-scene></div>
+              <img class="cg-fallback" src="/assets/work/cap-genie/selection-info.webp?v=20260927i" width="1600" height="900" alt="capgenie's selection analysis help: it finds a target sequence between an upstream and a downstream flank, or searches against a reference such as the default AAV9 sequence." loading="lazy">
+              <figcaption class="cg-cap">Illustrative. The reads, variants and counts are made up.</figcaption>
+            </figure>
+            <ol class="scrolly__steps">
+              <li class="scrolly__step" data-step="find">
+                <div class="scrolly__text">
+                  <h3>Find the variant in every read</h3>
+                  <p>Each read carries a capsid variant between two known flanks. capgenie finds the flanks and pulls out what sits between them. It can also search against a reference, or match known barcodes with a few mismatches.</p>
+                </div>
+              </li>
+              <li class="scrolly__step" data-step="clean">
+                <div class="scrolly__text">
+                  <h3>Clean out the noise</h3>
+                  <p>Reads below a Phred quality threshold are dropped. Then rare reads one mismatch away from a common variant merge into it, which clears out sequencing and PCR errors.</p>
+                </div>
+              </li>
+              <li class="scrolly__step" data-step="count">
+                <div class="scrolly__text">
+                  <h3>See which capsids grew</h3>
+                  <p>Each variant is counted in every sample and compared with the input library, which shows how much it grew. Results export to Excel, CSV and JSON.</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" aria-labelledby="cg-built">
+        <div class="wrap">
+          <div class="row row--first row--wide-aside row--center">
+            <div>
+              <h2 id="cg-built" class="chapter__h">How it&rsquo;s built</h2>
+              <p class="lede">capgenie is a Python package that hands the heavy work to compiled code. Cython parses the FASTQ files, and multithreaded C++ modules with OpenMP do the matching.</p>
+              <p>The web app is a Flask server hosted on Heroku, and the same package runs from the command line.</p>
+            </div>
+            <figure class="cg-arch">
+              <!-- cg-arch --><svg class="cg-arch__svg" viewBox="0 0 600 396" role="img" aria-labelledby="cg-arch-t" stroke-linecap="round" stroke-linejoin="round"><title id="cg-arch-t">Hand-drawn sketch of how capgenie is built: a command line and a Flask web app hosted on Heroku both call the capgenie Python package, where a Cython parser reads the FASTQ files and multithreaded C++ with OpenMP does the matching; results come out as Excel, CSV and JSON.</title><rect class="r-paper" x="24" y="16" width="244" height="76" rx="6"/><path class="r-ink" stroke-width="1.6" d="M24.4 15.1 C72.7 13.3, 126.1 15.7, 266.5 16 M23.8 16.9 C111.5 16.2, 197.8 15.7, 268.5 15.7 M267.7 15.7 C267.1 44.3, 270.4 70.7, 269.9 91.8 M268 15.9 C267.8 40.8, 268.4 64.4, 267.9 93 M266.8 92.5 C178.1 89, 86.6 90.3, 25.3 93.3 M268.5 92.1 C198.8 91.5, 128 90.7, 23.7 91.5 M25.3 92.1 C24.7 71.9, 24.5 53.7, 23.3 13.9 M24.4 92.8 C23.9 70.5, 23.8 47.4, 24 15.4"/><text class="rig-h" x="44" y="46">Command line</text><text class="rig-meta" x="44" y="72">$ capgenie -f ./fastq</text><rect class="r-fg" x="332" y="16" width="244" height="76" rx="6"/><path class="r-hg" stroke-width="0.8" d="M332.2 15.8 C332.2 15.8, 332.2 15.8, 332.2 15.8 M332.2 15.8 C332.2 15.8, 332.2 15.8, 332.2 15.8 M332.2 28 C336.4 24.5, 337.7 20, 342.3 15 M332.5 27 C335.1 24.4, 337.3 21.9, 342.5 16.2 M333.6 39.8 C337.5 32.7, 346 27.3, 355.6 15.7 M332.6 39.5 C337.6 34.6, 345.2 26.8, 353.1 16.2 M334.1 52.7 C340.8 38.6, 355.8 25.4, 365.2 15.8 M331 52.9 C341.3 41.2, 350.3 30.6, 363.4 16.7 M331.9 63.9 C344.7 48.8, 356.2 34.2, 375.8 16.7 M331 63.7 C341.8 53.9, 349.1 43.9, 375.5 14.9 M333.6 75.5 C349.7 58.9, 366.8 38.2, 384.1 13.4 M332 77.2 C343.7 63.7, 354.2 51.3, 386.3 16.2 M332 89.2 C351.3 67.1, 366.4 45.9, 394.4 18.3 M333.2 88.5 C350.9 67.6, 370.1 47, 394.9 16.5 M334.5 98.1 C350.4 77.8, 366 58.5, 403.9 16.1 M337.3 96.8 C351.4 79.6, 367.2 62.4, 405.6 16.6 M345.5 95.5 C366.3 76, 381 54.1, 414.6 18.3 M347.4 96.1 C368.3 71.8, 388.4 47.9, 416.3 15.5 M356.4 97.9 C382.2 65.1, 407.2 36.9, 427.7 18.1 M358.4 97.1 C384.8 66.2, 410.2 36.4, 426.3 16 M366.6 94.3 C394.2 66, 423.5 34.9, 436.9 14.6 M368.5 95.5 C383.1 78.9, 399.4 62.2, 436.8 16.1 M379.2 98.4 C397 79.3, 410.4 57.9, 450.6 15 M378.9 96.7 C406 64.2, 433.1 34.4, 448.7 15.4 M388.7 94.3 C414.3 69.1, 437.3 40.3, 459.6 18 M389.4 96.4 C413.9 68.2, 438.7 38.9, 458 17 M401.2 94.4 C417.2 76.6, 429.5 61.8, 468.4 16.2 M399.6 96.7 C426.8 68.2, 451 38.5, 469 16.1 M412.5 98.2 C430.9 72.9, 450.9 51.6, 480.2 14.9 M411.9 95.9 C429.6 75.3, 448.1 55.3, 480.1 15.2 M420 96.8 C444.6 69.8, 467.3 40.9, 493 16.8 M421.5 96.3 C437.7 80.6, 451.9 62.3, 491.3 15.2 M432.1 94.3 C452.9 74.1, 471.1 47.7, 502.1 14.1 M432.4 95.6 C456.7 69.5, 481.6 40.5, 500.6 16.5 M443.8 94.3 C463.6 68.5, 489.9 41.6, 514.4 17.7 M443.1 97 C462.9 73.3, 480.8 52, 511.2 15.4 M455.4 94.4 C478.4 69.5, 500.7 40.5, 523.7 18 M453.9 96.2 C475.4 72.8, 494.3 48.8, 521.9 16.1 M462 95.6 C483 72, 504.4 48.8, 534.1 14.4 M463.6 96.2 C485.5 69.7, 507.8 45.4, 534 15.5 M475.4 96.1 C497.8 70.6, 517.3 44.9, 544.6 15.7 M474.2 96.4 C493.5 74.3, 512.8 51.4, 543.9 15.7 M483.4 96.6 C503.3 76.9, 521.3 55.2, 554 16.9 M485.9 95.8 C505.8 70.9, 527.2 48.2, 554.3 15.3 M494 93.9 C512.4 76, 530.5 53.8, 563.9 16.7 M495.3 96 C516.8 73.2, 535.5 51.7, 564.8 15.3 M507.2 95.3 C525.4 74.7, 545 51, 574.3 16.7 M507.3 95.7 C522 77.5, 537.4 60.1, 576.5 14.8 M515.7 94.5 C531.6 80.1, 544.1 64.3, 582 22.4 M516.2 95.3 C533.3 79, 548.7 60.6, 582.2 20 M529.6 94.5 C542.9 77.1, 562 58.8, 580.1 32.7 M528.7 96 C541.9 77.3, 557.8 58.8, 581.3 32.9 M536.8 97.2 C548.4 80.7, 558.5 69.3, 581.7 45.7 M538.1 95.7 C547.5 84, 558.6 71.2, 582.2 46.9 M549.9 95.6 C558 85.7, 568.4 70.9, 583.2 55.7 M549 95.7 C560.1 84.4, 569.8 72.2, 580.9 56.8 M559.8 96.4 C564.7 87.1, 569.9 82.4, 582.2 69.4 M558.3 97.4 C567.5 87.3, 575.3 76.6, 582.5 69.1 M570.7 97.9 C573.7 92.4, 576.1 85.7, 580.9 83.6 M570.5 95.7 C574 91.2, 578.3 85.2, 581.7 81.2"/><path class="r-ink" stroke-width="1.6" d="M331.4 14.2 C382.2 17.9, 431.8 17.7, 575.6 14.6 M332.1 16.2 C424.2 17.3, 517.2 16.3, 576.8 15.5 M575.2 16 C577.3 44.8, 576.9 73.8, 577.2 93.1 M575.2 16.2 C576.6 46.2, 576.2 73.7, 575.3 92.3 M577.5 90.5 C481.4 90.6, 387.2 91.4, 333.1 91.1 M576.5 91.1 C511.7 93.3, 447.6 94.1, 331.6 92.4 M330.3 94 C332.1 65.8, 330 38.5, 334.1 14.8 M331.5 92.8 C332.5 71.4, 330.7 53, 331.3 15.4"/><text class="rig-h" x="352" y="46">Web app</text><text class="rig-meta rig-meta--card" x="352" y="72">Flask, hosted on Heroku</text><path class="r-ink" stroke-width="1.6" d="M146 94 C164.6 109.3, 180.4 126.5, 193.9 134.9 M146.5 94.8 C163.7 108.8, 178.8 122.4, 197.7 134.9"/><path class="r-ink" stroke-width="1.6" d="M189.4 125 C190.2 126.9, 191.2 129.7, 196.7 134.7 M189.3 125.3 C190.8 127.3, 192.3 129.4, 195.9 135.3 M195.4 135.2 C197.4 132.6, 199.2 130.2, 203 124.7 M196 135.2 C198 131.5, 200.1 128.5, 203.1 125.4"/><path class="r-ink" stroke-width="1.6" d="M454 94 C435.7 111.2, 419.5 125.8, 401.9 135.7 M452.7 93.6 C439.4 109.9, 418.9 124.6, 406.4 132.9"/><path class="r-ink" stroke-width="1.6" d="M396.5 125.7 C398 127.7, 400.3 128.4, 404.1 135 M396.8 124.7 C398.7 127.6, 401 130.5, 404.2 135.2 M404.5 135.4 C405 133.2, 407.6 129.8, 410.5 125.5 M404.2 135.3 C405.7 132.2, 407.4 129.7, 411.4 124.9"/><rect class="r-paper" x="24" y="140" width="552" height="180" rx="6"/><path class="r-ink" stroke-width="1.6" d="M24.8 140.4 C137.8 141.5, 250.5 140.1, 576.8 139.2 M23.9 140.3 C182.1 137.5, 339.2 137.5, 575.5 140.1 M577.2 141.6 C577.5 187.4, 576.4 231.7, 573.5 318.2 M575.7 138.9 C575.1 198.1, 576.1 257.8, 576.5 318.7 M576.5 319.6 C427.8 323.8, 279.4 322.8, 24.2 319.5 M576.5 319.6 C387.4 321.2, 198.9 320.9, 23.6 319.8 M25.2 317.9 C22.8 255.4, 19.5 187.1, 22.6 138.5 M23.5 320.9 C22.7 271.1, 23.9 220.9, 24.8 139.2"/><text class="rig-h" x="44" y="168">capgenie, a Python package</text><rect class="r-fa" x="48" y="186" width="228" height="112" rx="6"/><path class="r-ha" stroke-width="0.8" d="M47.9 186.1 C47.9 186.1, 47.9 186.1, 47.9 186.1 M47.9 186.1 C47.9 186.1, 47.9 186.1, 47.9 186.1 M49.8 198.4 C49.5 193.9, 54.1 193.1, 58 186.3 M48.2 198.9 C49.9 196.5, 51.5 193.3, 59.4 185.8 M48.2 209.4 C53.5 204.9, 59.5 197.8, 71.3 186.6 M49.3 209.7 C53.4 204.5, 60.3 197.2, 69.8 185.8 M47.6 221.1 C60 210.2, 70.7 193.9, 81.6 184 M49.2 221.7 C58.6 211, 68.6 198.9, 79.5 187 M46.7 236.2 C58.1 224.3, 68 212.4, 92.2 186 M47 234.1 C60.8 218.4, 76 202, 91.3 185.6 M49.9 245.1 C66.2 221.4, 88.7 200.1, 100.6 187 M48.7 247.7 C59.7 232.7, 73.4 217.2, 100 186.5 M47.4 261 C63 243.1, 76.7 227.1, 110.9 184.7 M47.1 259.7 C68.6 235, 88.2 211.8, 111.9 186.6 M46.1 271.3 C63.9 250.6, 85.2 231.6, 120.4 184.9 M48.6 270.2 C75.6 239.6, 103.4 207.3, 122.3 186.2 M47.9 283.9 C71.8 254.6, 99.3 221, 131.8 186.3 M47.2 284.4 C70.5 258.9, 91.5 232, 133.2 186.3 M45.6 295.7 C67.5 270.7, 90.2 244.9, 144.6 185.6 M46.9 295.7 C80.8 260, 113.8 221.2, 143.8 186.1 M55 297 C96.1 253, 134.1 209.8, 153.9 184.6 M56.9 297.8 C79.3 272.3, 102 246.6, 154.8 184.9 M65.5 298 C97.8 262.9, 128.1 224, 163.9 186.2 M68.2 297.7 C101.1 259.9, 136 219.6, 165.9 184.8 M77.8 298.4 C110.7 261.9, 139.8 228.6, 177.6 183.8 M78.8 298.1 C111.4 258.9, 147.6 218.2, 175.4 184.6 M90.4 298.2 C118.5 264.6, 144.7 233.5, 184.4 184.1 M88.9 297.5 C113.4 268.6, 139.8 239.1, 186.5 185.7 M98.8 299.8 C126.1 268.5, 153.8 236.3, 197.2 188.1 M98.3 297.3 C125.2 267.9, 150.2 239, 195.4 186.5 M111.1 297.9 C143.6 259.7, 176.4 225, 207.4 184.5 M110.6 298.8 C137.7 268.1, 167.3 235.4, 206.8 187.4 M122.1 297.2 C149.1 264.1, 178.5 226.3, 219 187.7 M119.6 298.9 C155 256.6, 193 214.4, 216.3 187 M129.5 298.5 C154.9 272, 175.7 247.8, 229.8 186.5 M130.6 299.1 C157.8 267.4, 185.4 235.5, 228.4 186.4 M140.3 300.6 C168.6 265.4, 197.5 231.9, 237.7 187.5 M140.2 298.2 C161.9 273.3, 186 247.4, 237.8 187.3 M153.1 298.5 C173.7 273.7, 195.7 249.6, 250.9 184.8 M150.6 298.5 C180.4 266.4, 207 233.8, 248.7 187.1 M161 298.5 C181.2 275.4, 202.3 251.1, 258.8 184.5 M161.7 298.3 C198.7 257.4, 233.9 214.5, 259.4 185.5 M171.3 299.9 C205.4 262.1, 237 225.5, 268.8 187.5 M171.6 298.9 C210.7 254.8, 248.6 213, 270.5 186.5 M183.9 299.6 C209.3 263.9, 239.7 232.2, 277.6 193.2 M184.1 298 C205.8 272.3, 230.9 245.6, 276 192.1 M194.8 299.1 C211.2 277.1, 232.2 255.2, 275.5 204.5 M193.5 297.8 C211 276.1, 230.9 256.5, 277 202.4 M204.9 296.7 C219.3 280.2, 236.9 261.5, 274.9 216.2 M203.6 298.8 C228.8 271.2, 251.9 244.4, 276.8 214.4 M214 298.3 C237.9 270.9, 260.8 245.4, 276.3 227.2 M215 298.8 C233.5 279.3, 251.8 257.1, 276.3 226.9 M226.4 296.4 C238.7 287.7, 246.3 271.9, 275.7 240.9 M225.8 297.8 C245.1 277.9, 263.1 256.8, 276.5 239.7 M235.7 298.9 C247.2 289.3, 255.3 278, 277.3 254.2 M237.2 299.4 C248 285.3, 258.4 274.6, 276.6 251.3 M247.1 299 C253 289.7, 261.1 283.1, 278.6 264.4 M247.2 297.8 C257.3 286.3, 267.9 274.3, 276.5 264.7 M259.2 299.5 C264.8 292.4, 273.8 283.2, 278.5 275.7 M258.2 299.1 C263.3 293.1, 267 287.2, 276.5 275.9 M268 296.9 C269.5 296.4, 274.2 294.3, 275.6 289 M269 297.6 C272.1 294.8, 274.8 290.5, 276.8 288.9"/><path class="r-ink" stroke-width="1.6" d="M48.4 185.8 C93.1 184.4, 141.8 182.9, 274.8 186.7 M48.2 185.8 C118.3 185, 188.8 186.3, 275.5 185.9 M276.5 187.6 C276.9 216.8, 276.8 247.2, 277.6 297.7 M275 185.3 C275.7 229.9, 275.4 273.8, 275.8 298.4 M276 299 C210.1 299.8, 146.1 301.3, 48.2 298.6 M276.9 298.1 C202.8 297.9, 131.4 297.1, 47.3 298.6 M46 298.1 C47.1 267.2, 46.8 239, 49.6 185.6 M49 298.7 C48 270.1, 47.3 242.6, 48.1 185.3"/><text class="rig-h rig-h--node" x="64" y="214">Cython</text><text class="rig-meta rig-meta--card" x="64" y="234">parses the FASTQ</text><rect class="r-paper" x="64" y="252" width="150" height="8" rx="3"/><path class="r-ink" stroke-width="1.1" d="M63.6 251.3 C94.7 251.6, 126.6 251.3, 214 251.5 M64.3 251.5 C113.1 251.9, 162.5 252.4, 213.9 251.8 M214 252.4 C213.8 254.1, 213.9 256.7, 214.2 260.2 M214.1 251.9 C213.9 254.1, 214.1 256.4, 213.8 259.9 M213.4 259.3 C170.1 261.8, 124 260, 64.1 258.9 M214.6 260.6 C170 260.7, 125.9 261.2, 63.5 259.8 M63.9 260.4 C63.8 257, 64.2 254.8, 64 252.1 M64 260.2 C64.1 258.3, 64.1 256.5, 63.9 251.8"/><rect class="r-paper" x="64" y="266" width="120" height="8" rx="3"/><path class="r-ink" stroke-width="1.1" d="M62.9 267 C89.6 265.7, 112.7 266, 184.7 266.9 M64.5 266.2 C105.5 266.1, 147.4 266.3, 184.2 265.7 M183.9 266.5 C183.6 268.1, 183.9 271, 184.1 273.5 M183.9 265.9 C184.2 268.7, 184.2 271.2, 184.1 273.8 M182.9 274.4 C146.7 274.3, 108.4 274.6, 64 273.9 M183.4 273.9 C152.2 273.5, 119.2 273.9, 63.5 274.5 M64.2 273.9 C63.6 272, 63.7 270.2, 63.7 266.3 M63.8 274.2 C64.2 271, 64.3 267.9, 64.2 265.8"/><rect class="r-paper" x="64" y="280" width="138" height="8" rx="3"/><path class="r-ink" stroke-width="1.1" d="M64.6 280.4 C91.9 280.7, 121 279.3, 201 280 M63.5 279.8 C115.6 280.1, 166.5 280, 202.4 279.5 M201.8 279.6 C202.4 283, 201.9 285.4, 201.9 287.8 M202.2 280 C202 283.2, 202.2 286.6, 202 288.1 M202.7 287 C156.2 289.4, 111 289.4, 63.9 288.8 M201.5 288.4 C168.1 289.1, 134 289.4, 63.4 287.9 M63.5 288.3 C64.4 285.4, 64 283.3, 64.3 279.5 M64.1 288.2 C64.1 285.4, 63.9 282.5, 64.1 279.8"/><path class="r-ink" stroke-width="1.6" d="M280 242 C292.6 237.9, 305.6 238.9, 315.9 241.9 M281 243.8 C291.2 240.3, 307.8 237.9, 317.7 241.5"/><path class="r-ink" stroke-width="1.6" d="M308.5 234.5 C310.5 236.4, 312.8 237.8, 319.3 242.3 M309 235.1 C311 236.7, 313.4 237.7, 318.8 242.3 M318.3 241.5 C315.3 244.6, 311.4 247.6, 308.4 249.5 M318.8 242.1 C315.8 244.5, 312.1 247, 309.3 248.7"/><rect class="r-fb" x="324" y="186" width="228" height="112" rx="6"/><path class="r-hb" stroke-width="0.8" d="M323.9 186.1 C323.9 186.1, 323.9 186.1, 323.9 186.1 M323.9 186.1 C323.9 186.1, 323.9 186.1, 323.9 186.1 M324 198.6 C328.7 194.1, 331.7 187.5, 333.9 187.4 M324.1 198.8 C327.4 193.9, 332.1 187.7, 334.6 186.8 M322.3 209.6 C333 202.6, 340.9 193.2, 347.2 187.3 M323.3 210.3 C329 204.7, 335.3 197.7, 344.6 185.2 M325.1 224.3 C333.5 214.9, 338.2 206.8, 353.9 186.4 M324.7 223.2 C335.6 209.7, 344.7 198, 355.8 187 M321.7 233.9 C340.1 215.5, 352.6 200.8, 364.3 185 M323.1 234.2 C333.7 222.5, 343.8 211.8, 367.4 186.1 M322.1 249 C336.7 230.4, 353.9 211.7, 377.3 185.9 M323.5 248 C338 230.5, 350.6 216.2, 376.2 186.5 M323 258.2 C345.7 233.1, 366.3 212.2, 386.9 186.1 M323.3 258.5 C346.4 234.5, 368.3 206.7, 388.5 185 M326.3 269.7 C340.6 251.5, 362.1 229.6, 396.4 184.2 M324 271 C348.1 244.6, 372.2 215.3, 398.6 186.4 M326.2 283.9 C355.6 247.1, 387.3 215.6, 408.5 184.9 M325.1 282.2 C341.7 263, 361 240.8, 409.7 185.4 M325 293.9 C348.3 265.7, 373.7 235.8, 421.1 183.6 M323.5 296.8 C352.3 263.6, 380.7 229.5, 418.6 186.6 M331.2 297.9 C370.1 257.2, 405.5 214.9, 430.5 185.1 M333 298.2 C357 268.6, 382.2 240.9, 430.2 186.5 M344 300 C367.2 274.8, 388.3 248.3, 441.2 187.8 M343 298.9 C375.5 262, 407.1 226, 440.5 186.8 M354.6 296.1 C380.6 263.8, 410.6 232.7, 450.8 184.6 M353.7 297.8 C388.8 257, 424.1 216.6, 452.4 185 M363 300 C401 256.1, 434.8 215.9, 459.9 186.9 M363.8 298.6 C399.4 258.3, 434.9 216.3, 461.4 185.7 M372.9 299.6 C401.1 264.7, 428.8 235, 470.6 185.9 M374.7 299 C401.5 266.4, 428.4 234.4, 473.8 184.7 M385.4 297.1 C418.8 260.6, 447.9 226.4, 482.7 185.7 M385.3 297.2 C419.4 257.5, 454.5 216.8, 483.1 186.4 M395.6 298.2 C425.4 263.6, 458.1 223.3, 491.7 186.6 M396.8 298.1 C416.7 275, 436.4 250.8, 492.3 187.2 M408.6 299.3 C438.5 260.6, 472.7 222.9, 505.4 185 M407.1 297.8 C433.4 267.1, 462.6 234, 503.7 187.2 M418.6 299 C444.8 267, 470.4 240.3, 516.4 186.8 M417.9 299 C452.9 257.4, 488.8 214.8, 514 186 M428.3 298.6 C464.1 257.5, 498.2 215, 523.4 185.1 M428.2 298 C455 268.4, 479.4 239.8, 525.8 186.3 M439.5 298.2 C468.1 265.5, 496.9 230.6, 537.6 187.4 M437.6 299.7 C465.1 269, 490.9 239.8, 535.1 185.1 M447.6 300.5 C466.8 275.6, 485.2 250.5, 548.1 187.8 M448 299.3 C475.7 268.3, 502.2 237.5, 546.9 185.3 M458 298.1 C490.8 262.3, 523.1 223.6, 551.7 189.9 M459.2 299.5 C478.5 274.3, 498.9 252.2, 552 191.2 M470.9 300.2 C500.5 263.8, 531.4 228.8, 551.9 204.6 M470.3 299.4 C487.8 277.2, 507.2 256.3, 552.7 204.5 M482.4 300.6 C500 279.3, 516.8 259.7, 553.4 215.6 M479.5 299.5 C496.6 279.8, 511.4 260.9, 552.6 216.6 M491.3 299.4 C502.4 283.2, 514.6 267.3, 553.6 227.4 M491.8 298.8 C510 277.5, 526.3 256.1, 552.4 228.6 M500.1 297.4 C520.1 277.9, 538.1 256.9, 551.5 241.1 M502 299.4 C517.4 281.5, 532.7 263.3, 552.7 239.5 M513.6 300.3 C530.3 278.7, 542.1 264, 552.6 253.9 M513.2 299 C521.6 289.8, 528.3 280.7, 553.5 251.3 M522.2 299.6 C527.2 291.9, 536.3 285.5, 551.8 264.9 M523.8 298.4 C532.4 286.8, 543.4 276.3, 551.8 263.7 M535.3 299.1 C537.9 292.8, 543.3 287.9, 553 277.6 M533.7 298.3 C539.5 291.2, 546 284, 552.5 276.2 M543.2 299.5 C546.6 293.5, 551.9 290.5, 552.4 288.6 M543.8 297.7 C546.8 295.3, 549.2 292.8, 553.2 288.9"/><path class="r-ink" stroke-width="1.6" d="M325.5 187.5 C371.1 185.1, 418.4 186.1, 550.1 185.2 M324.3 185.5 C376.7 184.6, 430.6 184.6, 552 186.4 M553.9 184.9 C550.5 227.9, 550.4 273, 554 296.4 M552.9 186.6 C550.9 209.5, 550.8 231.5, 552.3 298.5 M550.4 297.8 C466.7 298.6, 381 300.8, 323.3 296.3 M551.3 297.3 C467.5 299, 380.9 298.6, 324.8 298.9 M326 296.3 C322.2 256.7, 323.7 213.1, 325.1 186.5 M324.2 298.7 C323.6 272.1, 324.1 247.2, 324.8 185.2"/><text class="rig-h rig-h--node" x="340" y="214">C++ with OpenMP</text><text class="rig-meta rig-meta--card" x="340" y="234">matches on every thread</text><path class="r-ink" stroke-width="1.2" d="M340.2 252.3 C377.2 251.8, 413.5 252.9, 515.6 252.8 M340.3 252.3 C385.3 251.9, 430.5 251.6, 516.2 252.1"/><path class="r-ink" stroke-width="1.2" d="M509.9 247.9 C511.6 249.1, 513.2 249.8, 518.1 252 M509.8 248 C512.2 249.1, 514.4 250.4, 518.1 252 M518.1 251.9 C516.5 253.2, 514.3 253.4, 510.1 256.1 M517.9 252.2 C515.3 253.6, 512.6 254.7, 509.8 255.9"/><path class="r-ink" stroke-width="1.2" d="M339.1 262.2 C376.8 263.6, 412.9 263.8, 516.8 262.2 M339.7 262.6 C392.3 263.7, 445.6 263.8, 515.6 262.9"/><path class="r-ink" stroke-width="1.2" d="M510.2 259.3 C511.5 259.8, 513 260.9, 517.8 263.1 M509.9 259.1 C512.7 260.2, 515.1 261.4, 517.9 262.9 M518 263 C515.9 264.1, 513.6 264.9, 509.9 266.8 M518 262.9 C515.9 264, 513.7 265.2, 510 267"/><path class="r-ink" stroke-width="1.2" d="M339.9 274.2 C376.5 273.4, 412.4 274.7, 516 273.5 M340 273.9 C400.3 273.7, 460.7 274.3, 516 273.6"/><path class="r-ink" stroke-width="1.2" d="M509.8 269.9 C511.3 270.5, 513.5 272, 518.2 274.3 M510.1 269.8 C512.9 271.3, 515.8 272.9, 518.1 274.2 M517.8 274.1 C516 274.9, 513.7 276.3, 509.7 278.2 M518.1 274 C516.1 274.8, 514.4 275.7, 510.1 278.1"/><path class="r-ink" stroke-width="1.2" d="M340.8 284.2 C376.2 285.2, 411.8 283.6, 515.2 284.9 M340.4 285.1 C407.2 283.8, 474.9 283.8, 516.5 285.4"/><path class="r-ink" stroke-width="1.2" d="M510.1 281.2 C511.9 281.9, 513.3 282.4, 517.9 284.7 M509.8 280.9 C511.7 282, 513.3 282.7, 517.9 285.1 M518.4 285.2 C515.4 286.5, 513.1 287.6, 510.2 288.9 M517.9 285 C515.1 286.3, 512.4 287.8, 509.9 288.9"/><path class="r-ink" stroke-width="1.6" d="M300 322 C302 333.2, 300.3 341.2, 297.9 345.6 M299.7 323.7 C300.8 332.2, 298 341.3, 298.4 347.1"/><path class="r-ink" stroke-width="1.6" d="M292.3 336.7 C294.8 338.6, 295.5 340.7, 299.3 346.7 M292.9 337 C294.5 339.7, 296.6 342.3, 300.1 347 M300.4 347.5 C303.2 343.3, 305.3 340.4, 306.9 337.7 M299.9 347.2 C302.1 344.1, 304.1 341.3, 307.1 337"/><rect class="r-fp" x="178" y="352" width="72" height="30" rx="6"/><path class="r-ink" stroke-width="1.4" d="M178.9 350.4 C191.6 350.7, 208 351.8, 249.4 353.3 M178.2 351.4 C198.2 351.9, 216.3 351.7, 250.5 351.8 M250.5 353.6 C250.8 362.2, 250.4 375.8, 249.2 381.1 M249.2 352.7 C249.4 362.9, 250.5 372.6, 249.7 381.4 M249.9 381.5 C223.2 381.1, 200.4 381.4, 179.3 381.8 M249.9 382.6 C228.4 382.6, 206.3 383.1, 178.2 382.4 M177.9 383.2 C177.4 370.5, 179.4 362.2, 179.4 353 M177.6 382.6 C178 374.5, 178 369.1, 178.5 351.2"/><text class="rig-card" x="214" y="372" text-anchor="middle">Excel</text><rect class="r-fp" x="264" y="352" width="72" height="30" rx="6"/><path class="r-ink" stroke-width="1.4" d="M263.9 353 C279.1 352.7, 295.3 351.2, 336.4 351.9 M264.5 352.5 C285.2 352.1, 306.4 351.4, 335.1 351.5 M336.1 350.2 C336.1 362, 336.4 377.2, 334.6 382.1 M336.4 352.9 C336.4 359, 336.5 365.6, 335.2 382.7 M335.1 383.1 C310.8 382.7, 284.4 382.6, 265.2 383.2 M336 381.6 C315.2 381.4, 295.6 381.7, 264.1 381.5 M265.1 381.1 C262.8 374.3, 263.2 367.3, 264.1 353.7 M264.7 382.6 C264.3 369.9, 264.8 359.3, 264 351.2"/><text class="rig-card" x="300" y="372" text-anchor="middle">CSV</text><rect class="r-fp" x="350" y="352" width="72" height="30" rx="6"/><path class="r-ink" stroke-width="1.4" d="M348.9 352.1 C363 352.5, 379 352, 423.5 350.4 M350.8 351.9 C372.3 352.3, 394.6 352.9, 421.5 351.3 M421.7 350.4 C421.4 359.4, 422.3 363, 423.7 383.1 M421.7 351.2 C422.1 361.2, 421.3 368.9, 422.5 382.1 M420.2 381.1 C394.8 380.7, 368.4 383.7, 351 381 M422 382.4 C403.7 383.2, 384.9 383.3, 350 382.4 M348.6 382.7 C351.8 372.2, 350.7 364.1, 348.9 350.9 M350 382.6 C350.1 371.3, 349.2 361.6, 349.5 351.2"/><text class="rig-card" x="386" y="372" text-anchor="middle">JSON</text></svg><!-- /cg-arch -->
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter chapter--tint" aria-labelledby="cg-speed">
+        <div class="wrap">
+          <div class="row row--first row--wide-aside row--center">
+            <div>
+              <h2 id="cg-speed" class="chapter__h">Over 2 million reads a second</h2>
+              <p class="lede">Each OpenMP thread takes its own share of the reads. Together with the Cython parser, that cut the runtime by 40%.</p>
+              <p>The C++ extensions also keep memory use low on large datasets.</p>
+            </div>
+            <figure class="cg-speed" data-cg-speed-fig>
+              <div class="cg-speed__box" data-cg-speed></div>
+              <figcaption>
+                <button class="btn btn--outline run js-only" type="button" data-run data-state="running">
+                  <span class="run__glyph" aria-hidden="true"></span>
+                  <span class="run__labels">
+                    <span class="run__label" data-for="running">Pause</span>
+                    <span class="run__label" data-for="stopped">Play</span>
+                  </span>
+                </button>
+                <span>Illustrative: one FASTQ file split across threads.</span>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" aria-labelledby="cg-ways">
+        <div class="wrap">
+          <div class="chapter__head">
+            <h2 id="cg-ways">Two ways to run it</h2>
+            <p>The same analysis runs as a command-line tool or in a web app.</p>
+          </div>
+          <div class="cg-ways">
+            <figure class="cg-way">
+              <h3>Command line</h3>
+<pre><code>capgenie -f ./fastq \
+  -o ./results \
+  -cf capsids.csv -qual 20 \
+  -e input_library.fastq \
+  -ses mouse_data</code></pre>
+              <figcaption>Known variants from a capsid file, a Q20 quality filter, and enrichment against the input library.</figcaption>
+            </figure>
+            <figure class="cg-way">
+              <h3>Web app</h3>
+              <img src="/assets/work/cap-genie/web-new-dataset.webp?v=20260927i" width="1440" height="900" alt="The capgenie web app's new dataset page: name the dataset, then five steps (folder selection, analysis type, enrichment, denoise, motifs), starting with a choice between selecting a folder or individual FASTQ files." loading="lazy">
+              <figcaption>Pick a folder of FASTQ files, choose the analysis, then set enrichment and denoising. <a href="https://capgenie-a06c8d2f455a.herokuapp.com/new_dataset" rel="noopener">Try it</a></figcaption>
+            </figure>
+          </div>
+          <div class="cg-paper">
+            <h3>The paper</h3>
+            <p><cite>CAP-GENIE: An open-source tool for analyzing sequencing data from AAV vector selections and screens.</cite> Atul Phadke, Killian S. Hanlon, Casey A. Maguire. In review at Nature Communications.</p>
+          </div>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <footer class="site-foot" id="contact" aria-labelledby="contact-h">
+    <div class="wrap">
+      <h2 class="foot__statement" id="contact-h">Hiring for GPU infrastructure, or running a genetics lab that needs better software? Say hello.</h2>
+
+      <div class="foot__email-row">
+        <a class="foot__email" href="mailto:phadke.at@northeastern.edu" data-email>phadke.at@northeastern.edu</a>
+        <button class="btn btn--outline copy js-only" type="button" data-copy="phadke.at@northeastern.edu" data-state="idle">
+          <span class="copy__label" data-for="idle">Copy</span>
+          <span class="copy__label" data-for="copied">Copied</span>
+        </button>
+        <span class="sr-only" aria-live="polite" data-copy-status></span>
+      </div>
+
+      <ul class="foot__links" role="list">
+        <li><a href="https://github.com/AtulPhadke" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/atul-phadke8/" rel="noopener">LinkedIn</a></li>
+      </ul>
+
+      <div class="foot__meta">
+        <p>&copy; 2026 Atul Phadke. Boston, MA.</p>
+        <p>Designed and built by hand. No frameworks.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

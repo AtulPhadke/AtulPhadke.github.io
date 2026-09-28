@@ -1,0 +1,105 @@
+/* The rig · hero scheduling scene (js/rig.js + js/rig-art.js) · tokens only.
+ * The hand-drawn art carries no colours; these classes bind it to tokens. */
+
+.rig__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.rig {
+  transition: opacity var(--dur-slow) var(--ease-out);
+}
+
+/* ---------- ink + paper ---------- */
+.r-ink,
+.r-ink-thin { fill: none; stroke: var(--color-ink); }
+.r-hk { fill: none; stroke: var(--color-ink); opacity: 0.85; }
+.r-paper,
+.r-bubble,
+.r-node { fill: var(--color-paper); stroke: none; }
+.r-pupil,
+.r-hub { fill: var(--color-ink); stroke: none; }
+.r-blade { fill: none; stroke: var(--color-ink); stroke-width: 1.5; stroke-linecap: round; }
+.r-needle { fill: none; stroke: var(--color-ink); stroke-width: 1.8; stroke-linecap: round; }
+.r-gold { fill: var(--color-ill-amber); stroke: none; }
+
+/* ---------- fixed pastel families ---------- */
+.r-hb { fill: none; stroke: var(--color-ill-blue); }
+.r-hp { fill: none; stroke: var(--color-ill-pink); }
+.r-hg { fill: none; stroke: var(--color-ill-green); }
+.r-ha { fill: none; stroke: var(--color-ill-amber); }
+.r-fb { fill: var(--color-ill-blue-fill); stroke: none; }
+.r-fp { fill: var(--color-ill-pink-fill); stroke: none; }
+.r-fg { fill: var(--color-ill-green-fill); stroke: none; }
+.r-fa { fill: var(--color-ill-amber-fill); stroke: none; }
+
+/* ---------- variable family: colour set by data-job / data-state ---------- */
+.r-hx { fill: none; stroke: var(--job-h, var(--color-rule)); }
+.r-fx { fill: var(--job-f, var(--color-paper-2)); stroke: none; }
+
+[data-job="idle"] { --job-h: var(--color-rule); --job-f: var(--color-paper-2); }
+[data-job="blue"] { --job-h: var(--color-ill-blue); --job-f: var(--color-ill-blue-fill); }
+[data-job="green"] { --job-h: var(--color-ill-green); --job-f: var(--color-ill-green-fill); }
+[data-job="amber"] { --job-h: var(--color-ill-amber); --job-f: var(--color-ill-amber-fill); }
+[data-job="pink"] { --job-h: var(--color-ill-pink); --job-f: var(--color-ill-pink-fill); }
+[data-job="grey"] { --job-h: var(--color-muted); --job-f: var(--color-paper-3); }
+
+.gpu[data-job="idle"] .r-ink,
+.gpu[data-job="idle"] .r-blade { stroke: var(--color-muted); }
+.gpu-bar-bg { fill: var(--color-rule-2); }
+.gpu-bar { fill: var(--job-h, var(--color-rule)); }
+
+.shield[data-state="idle"] { --job-h: var(--color-rule); --job-f: var(--color-paper-2); }
+.shield[data-state="pass"] { --job-h: var(--color-ill-green); --job-f: var(--color-ill-green-fill); }
+.shield[data-state="fail"] { --job-h: var(--color-ill-pink); --job-f: var(--color-ill-pink-fill); }
+
+.prio-tab { fill: var(--color-ch2); }
+/* keep card labels readable over the hachure */
+.job-card .r-hx { opacity: 0.3; }
+.job-card .r-fx { opacity: 0.55; }
+.rig-trail {
+  fill: none;
+  stroke: var(--color-ink);
+  stroke-width: 1.3;
+  stroke-dasharray: 4 4;
+  stroke-linecap: round;
+}
+
+/* ---------- type ---------- */
+.rig-h,
+.rig-card,
+.rig-bubble {
+  font-family: var(--font-display);
+  font-variation-settings: var(--fv-display);
+  fill: var(--color-ink);
+}
+.rig-h { font-size: 15px; font-weight: 700; }
+.rig-h--node { font-size: 14px; }
+.rig-card { font-size: 13.5px; font-weight: 750; }
+.rig-bubble { font-size: 14px; font-weight: 750; }
+.rig-bubble--2 {
+  font-family: var(--font-body);
+  font-variation-settings: var(--fv-body);
+  font-size: 12px;
+  font-weight: 500;
+  fill: var(--color-ink-2);
+}
+.rig-bubble--sm { font-size: 13px; }
+.rig-bubble--sm.rig-bubble--2 { font-size: 11.5px; }
+
+.rig-meta {
+  font-family: var(--font-mono);
+  font-variation-settings: var(--fv-mono);
+  font-size: 11px;
+  font-weight: 500;
+  fill: var(--color-ink-2);
+}
+.rig-meta--card { font-size: 10.5px; fill: var(--color-ink); }
+.rig-meta--label,
+.rig-meta--tally { fill: var(--color-muted); }
+.rig-meta--gpu { font-size: 10px; fill: var(--color-muted); }
+.rig-meta--defer,
+.rig-meta--alert { fill: var(--color-ch2-ink); font-weight: 650; }
+.rig-meta--defer.is-resume { fill: var(--color-ch1-ink); }
+.rig-input.is-alert .rig-meta { fill: var(--color-ch2-ink); font-weight: 650; }

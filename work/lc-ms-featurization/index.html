@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>LC-MS featurization — Atul Phadke</title>
+  <meta name="description" content="A C++/Python algorithm that links MS2 spectra to MS1 peak-shaped features, detecting 5× more lipid analytes than MZmine and MS-DIAL.">
+  <link rel="canonical" href="https://atulphadke.github.io/work/lc-ms-featurization/">
+  <meta name="theme-color" content="#eff6fb">
+  <meta name="author" content="Atul Phadke">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Atul Phadke">
+  <meta property="og:title" content="LC-MS featurization — Atul Phadke">
+  <meta property="og:description" content="A C++/Python algorithm that links MS2 spectra to MS1 peak-shaped features, detecting 5× more lipid analytes than MZmine and MS-DIAL.">
+  <meta property="og:url" content="https://atulphadke.github.io/work/lc-ms-featurization/">
+  <meta property="og:image" content="https://atulphadke.github.io/assets/og.png">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Recursive:wght,CASL,MONO@300..1000,0..1,0..1&amp;display=swap">
+
+  <link rel="stylesheet" href="/tokens.css?v=20260927i">
+  <link rel="stylesheet" href="/css/site.css?v=20260927i">
+  <link rel="stylesheet" href="/css/project.css?v=20260927i">
+  <link rel="stylesheet" href="/css/scrolly.css?v=20260927i">
+  <link rel="stylesheet" href="/css/lcms.css?v=20260927i">
+
+  <script>document.documentElement.classList.add('js');</script>
+  <script src="/js/site.js?v=20260927i" defer></script>
+  <script src="/js/scrolly.js?v=20260927i" defer></script>
+  <script src="/js/lcms.js?v=20260927i" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-head">
+    <nav class="nav wrap" aria-label="Primary">
+      <a class="nav__wordmark" href="/">Atul Phadke</a>
+      <button class="nav__toggle js-only" type="button" aria-expanded="false" aria-controls="nav-menu">Menu</button>
+      <div class="nav__menu" id="nav-menu">
+        <ul class="nav__links" role="list">
+          <li><a class="nav__link" href="/#work">Work</a></li>
+          <li><a class="nav__link" href="#contact">Contact</a></li>
+        </ul>
+        <a class="btn btn--ink nav__cta" href="mailto:phadke.at@northeastern.edu">Email me</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <article>
+      <header class="project-hero project-hero--split project-hero--result wrap">
+        <div>
+          <a class="project-back" href="/#work"><span aria-hidden="true">&larr;</span> All work</a>
+          <h1 class="project-title">LC-MS featurization</h1>
+          <p class="project-context">Matterworks.ai, 2026</p>
+          <p class="work-card__tags"><span class="tag tag--biology"><span class="tag__sq" aria-hidden="true"></span>Biology</span></p>
+          <p class="project-summary">During my ML engineering co-op at Matterworks.ai, I built a C++/Python algorithm that links MS2 spectra to the MS1 peak-shaped features they came from. It works on XICs (extracted ion chromatograms).</p>
+          <ul class="stack" aria-label="Stack"><li>C++</li><li>Python</li></ul>
+        </div>
+        <div class="result">
+          <p class="result__n">5&times;</p>
+          <p class="result__what">more lipid analytes detected than the industry tools MZmine and MS-DIAL</p>
+          <p class="result__note">Proprietary work with no public code, so the figures here use simulated data and don&rsquo;t show the method.</p>
+        </div>
+      </header>
+
+      <!-- One long simulated XIC, scrubbed by scroll (js/lcms.js) -->
+      <section class="lcms-chapter" aria-labelledby="s-find">
+        <h2 id="s-find" class="chapter__h lcms-chapter__h wrap">Finding features</h2>
+        <div class="scrolly lcms-scrolly wrap" data-scrolly="xic" data-lcms-xic>
+          <div class="scrolly__stage">
+            <div class="project-media lcms-frame">
+              <img class="lcms-static" src="/assets/work/lc-ms-featurization/xic-static.svg?v=20260927i" width="960" height="600" loading="lazy" alt="A simulated XIC at m/z 760.585 over about 11 minutes with all 11 features marked in pink. Labels mark the ones MZmine missed: four low-intensity peaks near the noise, a shoulder on a bigger peak and a co-eluting peak.">
+            </div>
+          </div>
+          <ol class="scrolly__steps">
+            <li class="scrolly__step" data-step="elute">
+              <div class="scrolly__text">
+                <h3>One molecule, one m/z</h3>
+                <p>A molecule comes off the column over a few seconds, so its signal at one m/z rises and falls as a peak.</p>
+              </div>
+            </li>
+            <li class="scrolly__step" data-step="feature">
+              <div class="scrolly__text">
+                <h3>A feature</h3>
+                <p>The peak has fainter isotope copies about 1&nbsp;Da heavier. Boxed together, they make one feature.</p>
+              </div>
+            </li>
+            <li class="scrolly__step" data-step="mzmine">
+              <div class="scrolly__text">
+                <h3>MZmine&rsquo;s pass</h3>
+                <p>Over about 11 minutes this m/z holds 11 features. MZmine calls the peaks that clear the noise and finds 5.</p>
+              </div>
+            </li>
+            <li class="scrolly__step" data-step="ours">
+              <div class="scrolly__text">
+                <h3>Our pass</h3>
+                <p>Ours finds all 11, including the 6 MZmine missed: four near the noise, a shoulder on a bigger peak and a co-eluting neighbour.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="chapter chapter--tint" aria-labelledby="s-link">
+        <div class="wrap">
+          <div class="row row--first row--wide-aside row--center">
+            <div>
+              <h2 id="s-link" class="chapter__h">Linking MS2 to MS1</h2>
+              <p class="lede">MS1 gives a molecule&rsquo;s mass, but many molecules share one. An MS2 scan breaks one precursor into fragments, and that pattern identifies it.</p>
+              <p>It only helps once the spectrum is tied to the feature its precursor came from. That linking is what my algorithm does.</p>
+            </div>
+            <figure class="lcms-fig" data-lcms-link>
+              <div class="project-media lcms-frame lcms-frame--link">
+                <img class="lcms-static" src="/assets/work/lc-ms-featurization/card.svg?v=20260927i" width="480" height="300" loading="lazy" alt="Hand-drawn sketch of one LC-MS feature: a peak in front with two fainter isotope traces behind it, all inside a pink box, and a dashed line from the peak&rsquo;s apex to a small MS2 spectrum.">
+              </div>
+              <figcaption class="lcms-cap">
+                <button class="btn btn--outline js-only" type="button" data-replay>Replay</button>
+                <span class="lcms-cap__text">Simulated. Spectrum a lands inside one feature and links. Spectrum b lands on none. Spectrum c lands where two features with the same m/z overlap.</span>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" aria-labelledby="s-result">
+        <div class="wrap">
+          <div class="row row--first row--wide-aside row--center">
+            <div>
+              <h2 id="s-result" class="chapter__h">The result</h2>
+              <p class="lede">In the real comparison, my algorithm detected 5&times; more lipid analytes than MZmine and MS-DIAL.</p>
+            </div>
+            <figure class="lcms-fig lcms-fig--result js-only" data-lcms-result aria-hidden="true">
+              <div class="project-media lcms-frame lcms-frame--result"></div>
+            </figure>
+          </div>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <footer class="site-foot" id="contact" aria-labelledby="contact-h">
+    <div class="wrap">
+      <h2 class="foot__statement" id="contact-h">Hiring for GPU infrastructure, or running a genetics lab that needs better software? Say hello.</h2>
+
+      <div class="foot__email-row">
+        <a class="foot__email" href="mailto:phadke.at@northeastern.edu" data-email>phadke.at@northeastern.edu</a>
+        <button class="btn btn--outline copy js-only" type="button" data-copy="phadke.at@northeastern.edu" data-state="idle">
+          <span class="copy__label" data-for="idle">Copy</span>
+          <span class="copy__label" data-for="copied">Copied</span>
+        </button>
+        <span class="sr-only" aria-live="polite" data-copy-status></span>
+      </div>
+
+      <ul class="foot__links" role="list">
+        <li><a href="https://github.com/AtulPhadke" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/atul-phadke8/" rel="noopener">LinkedIn</a></li>
+      </ul>
+
+      <div class="foot__meta">
+        <p>&copy; 2026 Atul Phadke. Boston, MA.</p>
+        <p>Designed and built by hand. No frameworks.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

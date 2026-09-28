@@ -18,3 +18,12 @@ package-lock.json
 
 # Ignore folders related to IDEs
 .vscode/
+
+# macOS
+.DS_Store
+
+# Local tooling, not part of the site
+.claude/
+.hallmark/
+.ruff_cache/
+scratchpad/
