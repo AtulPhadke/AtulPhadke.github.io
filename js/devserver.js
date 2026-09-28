@@ -1,7 +1,9 @@
-/* Devserver provisioning in Slack · the scroll scene.
- * Needs js/scrolly.js (loaded first). The drawing is inline in the page
- * (built by scratchpad/gpu-art/build-dev-scene.js); this file only switches
- * its states and moves the camera (the SVG viewBox) as the steps change.
+/* Devserver provisioning in Slack · the scene plays itself.
+ * The drawing is inline in the page (built by scratchpad/gpu-art/build-dev-scene.js);
+ * this file switches its states and moves the camera (the SVG viewBox). The steps
+ * advance on a timer and loop; clicking a step title jumps to it. The Pause button
+ * (site.js dispatches 'scope:run'), leaving the screen, and reduced motion all stop
+ * the advance as well as the loops.
  *
  *   step 0 ask        the request is typed into Slack and sent; the app replies
  *   step 1 provision  the arrow draws, box-3 goes pending then running, EFS mounts
@@ -16,9 +18,10 @@
 (() => {
   'use strict';
 
-  const root = document.querySelector('[data-scrolly="devserver"]');
+  const root = document.querySelector('[data-dv]');
   const svg = root && root.querySelector('.dv-svg');
-  if (!root || !svg || !window.Scrolly) return;
+  if (!root || !svg) return;
+  const stepEls = Array.from(root.querySelectorAll('.dv-step'));
 
   const mqReduce = matchMedia('(prefers-reduced-motion: reduce)');
   const $ = (sel) => svg.querySelector(sel);
@@ -335,30 +338,79 @@
 
   const canAnimate = () => !reduce() && visible;
 
-  // first frame: no transitions, then the stage fades in and the step plays
-  const first = Math.max(0, Math.min(H.length - 1, window.Scrolly.get(root).index));
-  index = first;
-  apply(first, false);
-  root.classList.add('is-dv');
-  if (canAnimate()) requestAnimationFrame(() => apply(first, true));
-
-  window.Scrolly.onStep(root, ({ index: i }) => {
-    if (i < 0 || i === index) return;
+  /* ---------- auto-advance: each step holds long enough to finish playing ---------- */
+  const DWELL = [6500, 7000, 8000];
+  let advance = 0;
+  let left = 0;      // ms still to wait on the current step
+  let since = 0;     // when the current wait started
+  const moving = () => running && visible && !reduce();
+  function markSteps() {
+    stepEls.forEach((el, k) => {
+      el.classList.toggle('is-active', k === index);
+      const btn = el.querySelector('.dv-step__btn');
+      if (btn) btn.setAttribute('aria-current', k === index ? 'step' : 'false');
+    });
+  }
+  function hold() {
+    clearTimeout(advance);
+    advance = 0;
+    if (since) left = Math.max(0, left - (performance.now() - since));
+    since = 0;
+  }
+  function wait() {
+    clearTimeout(advance);
+    advance = 0;
+    since = 0;
+    if (!moving()) return;
+    since = performance.now();
+    advance = setTimeout(() => go((index + 1) % H.length), left);
+  }
+  function syncMotion() {
+    root.classList.toggle('is-halted', !moving());
+    if (!moving()) hold();
+    else if (!advance) wait();   // already counting down: leave it be
+    updateLive();
+  }
+  function go(i) {
+    clearTimeout(advance);
+    advance = 0;
     index = i;
     apply(i, canAnimate());
+    // restart the step's progress bar
+    root.classList.remove('is-ticking');
+    root.style.setProperty('--dv-dwell', `${DWELL[i]}ms`);
+    markSteps();
+    root.getBoundingClientRect();
+    root.classList.add('is-ticking');
+    left = DWELL[i];
+    since = 0;
+    syncMotion();
+  }
+
+  // first frame: no transitions, then the stage fades in and the first step plays
+  index = 0;
+  apply(0, false);
+  markSteps();
+  root.classList.add('is-dv');
+  requestAnimationFrame(() => go(0));
+
+  stepEls.forEach((el, k) => {
+    const btn = el.querySelector('.dv-step__btn');
+    if (btn) btn.addEventListener('click', () => go(k));
   });
 
   new IntersectionObserver(([e]) => {
     visible = e.isIntersecting;
-    updateLive();
-  }).observe(root);
+    syncMotion();
+  }, { threshold: 0.25 }).observe(root.querySelector('.dv-stage') || root);
 
   document.addEventListener('scope:run', (e) => {
     running = !!(e.detail && e.detail.running);
-    updateLive();
+    syncMotion();
   });
   mqReduce.addEventListener('change', () => {
     if (mqReduce.matches) running = false;
     apply(index, false);
+    syncMotion();
   });
 })();

@@ -1,34 +1,32 @@
-/* Devserver provisioning in Slack · the scroll scene · tokens only.
- * Layout comes from css/scrolly.css; the drawing is built by
- * scratchpad/gpu-art/build-dev-scene.js and driven by js/devserver.js.
+/* Devserver provisioning in Slack · a scene that plays itself · tokens only.
+ * The drawing is built by scratchpad/gpu-art/build-dev-scene.js and driven by
+ * js/devserver.js, which advances the steps on a timer.
  *
  * Without JS (or before js/devserver.js adds .is-dv) the drawing shows its
  * finished frame: every part on, the request sent, box-3 running and mounted. */
 
 /* ---------- layout: the hero sits above the steps, the stage spans both ---------- */
-.dv { padding-block: var(--space-lg) var(--space-2xl); }
-.dv-hero.project-hero { padding-block: var(--space-sm) var(--space-lg); }
-.dv .project-title { font-size: clamp(2.25rem, 3.9vw, 3.75rem); }
+.dv { padding-block: var(--space-md) var(--space-2xl); }
+.dv-hero.project-hero { padding-block: 0 var(--space-md); }
+.dv .project-title { font-size: clamp(2.25rem, 3.4vw, 3.25rem); }
 .dv .project-summary { max-width: 40ch; font-size: var(--text-md); }
-.dv-hint {
-  margin-block-start: var(--space-lg);
-  font-size: var(--text-sm);
-  color: var(--color-muted);
-}
 
+/* one screen: the text and the steps on the left, the scene on the right */
 @media (min-width: 60rem) {
-  .dv.scrolly {
+  .dv {
+    display: grid;
     grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-    grid-template-rows: auto auto;
+    grid-template-rows: auto 1fr;
     column-gap: var(--space-xl);
-    row-gap: 0;
+    align-items: start;
   }
   .dv > .dv-hero { grid-column: 1; grid-row: 1; }
-  .dv > .scrolly__steps { grid-column: 1; grid-row: 2; }
-  .dv > .scrolly__stage { grid-column: 2; grid-row: 1 / span 2; }
-  /* no JS: still keep the finished drawing beside the step list */
-  .dv > .scrolly__stage { position: sticky; top: calc(var(--nav-h) + var(--space-md)); }
-  .dv-canvas { max-height: calc(100svh - var(--nav-h) - var(--space-md) * 2 - 3rem); }
+  .dv > .dv-steps { grid-column: 1; grid-row: 2; }
+  .dv > .dv-stage { grid-column: 2; grid-row: 1 / span 2; margin-block-start: var(--space-sm); }
+  .dv-canvas {
+    aspect-ratio: auto;
+    height: min(calc(100svh - var(--nav-h) - 7rem), 46rem);
+  }
 }
 
 /* ---------- steps ---------- */
@@ -48,7 +46,49 @@
   font-size: var(--text-sm);
   color: var(--color-muted);
 }
-.dv-steps .scrolly__step + .scrolly__step { margin-block-start: var(--space-lg); }
+.dv-steps {
+  display: grid;
+  gap: var(--space-xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.dv-step {
+  position: relative;
+  padding: 0 0 var(--space-2xs) var(--space-md);
+  border-inline-start: 3px solid var(--color-rule);
+}
+.dv-step p { margin-block-start: 0; font-size: var(--text-sm); line-height: 1.5; color: var(--color-ink-2); }
+.dv-step .dv-step__h { margin-block-end: 0; font-size: var(--text-lg); }
+.dv-step .dv-result { color: var(--color-ink); }
+.js .dv.is-dv .dv-step:not(.is-active) { opacity: 0.5; }
+.js .dv.is-dv .dv-step.is-active { border-color: var(--color-ch1-wash); }
+.dv-step__btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+.dv-step__btn:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; border-radius: var(--radius-sm); }
+@media (hover: hover) {
+  .dv-step__btn:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+}
+/* how long until the next step: fills down the active step's edge */
+.dv-step__bar {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: -3px;
+  width: 3px;
+  background: var(--color-ch1);
+  transform: scaleY(0);
+  transform-origin: top;
+}
 
 /* ---------- stage ---------- */
 .dv-stage {
@@ -64,11 +104,6 @@
   border: var(--rule-hair) solid var(--color-rule);
   border-radius: var(--radius-md);
   background: var(--color-paper);
-}
-.js .dv.is-scrolly .dv-canvas {
-  flex: 1 1 auto;
-  min-height: 0;
-  aspect-ratio: auto;
 }
 .dv-svg {
   position: absolute;
@@ -194,6 +229,9 @@
 .dv.is-dv .dv-svg { transition: opacity var(--dur-slow) var(--ease-out); }
 
 @media (prefers-reduced-motion: no-preference) {
+  .dv.is-dv .dv-step { transition: opacity var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out); }
+  .dv.is-ticking .dv-step.is-active .dv-step__bar { animation: dv-dwell var(--dv-dwell, 7s) linear forwards; }
+  .dv.is-halted .dv-step__bar { animation-play-state: paused; }
   .dv.is-dv .dv-part,
   .dv.is-dv .dv-ask,
   .dv.is-dv .dv-bot__say,
@@ -238,11 +276,11 @@
 @keyframes dv-ell { 0% { fill-opacity: 0.2; } 40% { fill-opacity: 1; } }
 @keyframes dv-ping { from { opacity: 0.9; transform: scale(1); } to { opacity: 0; transform: scale(2.4); } }
 @keyframes dv-flow { to { stroke-dashoffset: -17; } }
+@keyframes dv-dwell { to { transform: scaleY(1); } }
 
 /* ---------- narrow: the stage pins to the top, steps pass over it ---------- */
 @media (max-width: 59.99rem) {
   .dv-hero.project-hero { padding-block-end: var(--space-xl); }
   .dv-cap { flex-wrap: nowrap; font-size: var(--text-xs); line-height: 1.4; }
-  /* a card that has scrolled past would sit, faded, on top of the drawing */
-  .js .dv.is-scrolly .scrolly__step.is-past { opacity: 0; }
+  .dv > .dv-stage { margin-block-end: var(--space-lg); }
 }
