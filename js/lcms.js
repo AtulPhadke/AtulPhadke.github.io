@@ -10,7 +10,6 @@
  *                       with reduced motion u snaps to each step's last frame.
  *   [data-lcms-link]    three MS2 spectra linking (or not) to MS1 features;
  *                       plays once when seen, Replay starts it over.
- *   [data-lcms-result]  the real 5x result as units; plays once when seen.
  * Colours come from tokens.css via getComputedStyle; oklch() is converted to
  * sRGB here so alpha variants work in every canvas implementation.
  */
@@ -1443,79 +1442,9 @@
     return { sl, layout, render, END };
   }
 
-  /* ------------------------------------------------------------------ *
-   * 3. The real result as units: one for them, five for ours
-   * ------------------------------------------------------------------ */
-  function resultView(sl) {
-    const rowA = span(sl.layer, 'lcms-tick lcms-res__row', 'MZmine, MS-DIAL');
-    const rowB = span(sl.layer, 'lcms-tick lcms-res__row lcms-res__row--ours', 'Ours');
-    let S = null, G = null;
-
-    function layout(s) {
-      S = s;
-      const narrow = s.w < 480;
-      const pad = narrow ? 16 : 28;
-      const gap = narrow ? 8 : 14;
-      const bw = Math.min(104, (s.w - 2 * pad - 4 * gap) / 5);
-      const bh = bw * 0.72;
-      const lab = 24, rowGap = narrow ? 18 : 26;
-      const y0 = Math.max(pad, (s.h - (2 * (lab + bh) + rowGap)) / 2) + lab;
-      G = { pad, bw, bh, gap, rows: [y0, y0 + bh + rowGap + lab] };
-      put(rowA, pad, G.rows[0] - 21);
-      put(rowB, pad, G.rows[1] - 21);
-    }
-
-    function unit(ctx, x, y, w, h, ours, p, seed) {
-      if (p <= 0) return;
-      const k = 0.7 + 0.3 * p;
-      const cx = x + w / 2, cy = y + h / 2;
-      ctx.save();
-      ctx.translate(cx, cy);
-      ctx.scale(k, k);
-      ctx.translate(-cx, -cy);
-      ctx.globalAlpha = p;
-      rrect(ctx, x, y, w, h, 8);
-      ctx.fillStyle = ours ? rgba(C.ch2, 0.12) : rgba(C.paper);
-      ctx.fill();
-      sketch(ctx, loopPts(x, y, w, h, 8), 1, seed, ours ? C.ch2 : C.muted, ours ? 2 : 1.5);
-      ctx.beginPath();
-      for (let i = 0; i <= 24; i++) {
-        const t = i / 24, px = x + 8 + t * (w - 16);
-        const py = y + h - 8 - (h - 18) * Math.exp(-0.5 * ((t - 0.45) / 0.14) ** 2);
-        if (i) ctx.lineTo(px, py);
-        else ctx.moveTo(px, py);
-      }
-      ctx.strokeStyle = rgba(C.ink, ours ? 0.9 : 0.55);
-      ctx.lineWidth = 1.6;
-      ctx.lineJoin = 'round';
-      ctx.stroke();
-      ctx.globalAlpha = 1;
-      ctx.restore();
-    }
-
-    const END = 1.4;
-    function render(t) {
-      if (!G) return;
-      const ctx = sl.ctx;
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.clearRect(0, 0, sl.canvas.width, sl.canvas.height);
-      ctx.setTransform(S.dpr, 0, 0, S.dpr, 0, 0);
-      unit(ctx, G.pad, G.rows[0], G.bw, G.bh, false, easeOut(seg(t, 0, 0.3)), 500);
-      for (let k = 0; k < 5; k++) {
-        unit(ctx, G.pad + k * (G.bw + G.gap), G.rows[1], G.bw, G.bh, true, easeOut(seg(t, 0.4 + 0.15 * k, 0.7 + 0.15 * k)), 510 + k);
-      }
-    }
-
-    return { sl, layout, render, END };
-  }
-
   function initLink(fig) {
     const frame = fig.querySelector('.lcms-frame');
     if (frame) playOnce(fig, mapView(surface(frame)));
-  }
-  function initResult(fig) {
-    const frame = fig.querySelector('.lcms-frame');
-    if (frame) playOnce(fig, resultView(surface(frame)));
   }
 
   /* ------------------------------------------------------------------ */
@@ -1528,7 +1457,6 @@
     };
     run('[data-lcms-xic]', initXic);
     run('[data-lcms-link]', initLink);
-    run('[data-lcms-result]', initResult);
   }
 
   if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', init);

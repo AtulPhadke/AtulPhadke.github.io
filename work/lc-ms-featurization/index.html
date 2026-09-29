@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>LC-MS featurization — Atul Phadke</title>
-  <meta name="description" content="A C++/Python algorithm that links MS2 spectra to MS1 peak-shaped features, detecting 5× more lipid analytes than MZmine and MS-DIAL.">
+  <meta name="description" content="A C++/Python algorithm that links MS2 spectra to MS1 peak-shaped features, with significantly improved lipid analyte detection over MZmine and MS-DIAL.">
   <link rel="canonical" href="https://atulphadke.github.io/work/lc-ms-featurization/">
   <meta name="theme-color" content="#eff6fb">
   <meta name="author" content="Atul Phadke">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Atul Phadke">
   <meta property="og:title" content="LC-MS featurization — Atul Phadke">
-  <meta property="og:description" content="A C++/Python algorithm that links MS2 spectra to MS1 peak-shaped features, detecting 5× more lipid analytes than MZmine and MS-DIAL.">
+  <meta property="og:description" content="A C++/Python algorithm that links MS2 spectra to MS1 peak-shaped features, with significantly improved lipid analyte detection over MZmine and MS-DIAL.">
   <meta property="og:url" content="https://atulphadke.github.io/work/lc-ms-featurization/">
   <meta property="og:image" content="https://atulphadke.github.io/assets/og.png">
   <meta name="twitter:card" content="summary">
@@ -21,16 +21,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Recursive:wght,CASL,MONO@300..1000,0..1,0..1&amp;display=swap">
 
-  <link rel="stylesheet" href="/tokens.css?v=20260927n">
-  <link rel="stylesheet" href="/css/site.css?v=20260927n">
-  <link rel="stylesheet" href="/css/project.css?v=20260927n">
-  <link rel="stylesheet" href="/css/scrolly.css?v=20260927n">
-  <link rel="stylesheet" href="/css/lcms.css?v=20260927n">
+  <link rel="stylesheet" href="/tokens.css?v=20260929a">
+  <link rel="stylesheet" href="/css/site.css?v=20260929a">
+  <link rel="stylesheet" href="/css/project.css?v=20260929a">
+  <link rel="stylesheet" href="/css/scrolly.css?v=20260929a">
+  <link rel="stylesheet" href="/css/lcms.css?v=20260929a">
 
   <script>document.documentElement.classList.add('js');</script>
-  <script src="/js/site.js?v=20260927n" defer></script>
-  <script src="/js/scrolly.js?v=20260927n" defer></script>
-  <script src="/js/lcms.js?v=20260927n" defer></script>
+  <script src="/js/site.js?v=20260929a" defer></script>
+  <script src="/js/scrolly.js?v=20260929a" defer></script>
+  <script src="/js/lcms.js?v=20260929a" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -61,8 +61,8 @@
           <ul class="stack" aria-label="Stack"><li>C++</li><li>Python</li></ul>
         </div>
         <div class="result">
-          <p class="result__n">5&times;</p>
-          <p class="result__what">more lipid analytes detected than the industry tools MZmine and MS-DIAL</p>
+          <p class="result__n result__n--word lcms-result__word">Significantly improved</p>
+          <p class="result__what">lipid analyte detection over the industry tools MZmine and MS-DIAL</p>
           <p class="result__note">Proprietary work with no public code, so the figures here use simulated data and don&rsquo;t show the method.</p>
         </div>
       </header>
@@ -73,7 +73,7 @@
         <div class="scrolly lcms-scrolly wrap" data-scrolly="xic" data-lcms-xic>
           <div class="scrolly__stage">
             <div class="project-media lcms-frame">
-              <img class="lcms-static" src="/assets/work/lc-ms-featurization/xic-static.svg?v=20260927n" width="960" height="600" loading="lazy" alt="A simulated XIC at m/z 760.585 over about 11 minutes with all 11 features marked in pink. Labels mark the ones MZmine missed: four low-intensity peaks near the noise, a shoulder on a bigger peak and a co-eluting peak.">
+              <img class="lcms-static" src="/assets/work/lc-ms-featurization/xic-static.svg?v=20260929a" width="960" height="600" loading="lazy" alt="A simulated XIC at m/z 760.585 over about 11 minutes with all 11 features marked in pink. Labels mark the ones MZmine missed: four low-intensity peaks near the noise, a shoulder on a bigger peak and a co-eluting peak.">
             </div>
           </div>
           <ol class="scrolly__steps">
@@ -115,26 +115,12 @@
             </div>
             <figure class="lcms-fig" data-lcms-link>
               <div class="project-media lcms-frame lcms-frame--link">
-                <img class="lcms-static" src="/assets/work/lc-ms-featurization/card.svg?v=20260927n" width="480" height="300" loading="lazy" alt="Hand-drawn sketch of one LC-MS feature: a peak in front with two fainter isotope traces behind it, all inside a pink box, and a dashed line from the peak&rsquo;s apex to a small MS2 spectrum.">
+                <img class="lcms-static" src="/assets/work/lc-ms-featurization/card.svg?v=20260929a" width="480" height="300" loading="lazy" alt="Hand-drawn sketch of one LC-MS feature: a peak in front with two fainter isotope traces behind it, all inside a pink box, and a dashed line from the peak&rsquo;s apex to a small MS2 spectrum.">
               </div>
               <figcaption class="lcms-cap">
                 <button class="btn btn--outline js-only" type="button" data-replay>Replay</button>
                 <span class="lcms-cap__text">Simulated. Spectrum a lands inside one feature and links. Spectrum b lands on none. Spectrum c lands where two features with the same m/z overlap.</span>
               </figcaption>
-            </figure>
-          </div>
-        </div>
-      </section>
-
-      <section class="chapter" aria-labelledby="s-result">
-        <div class="wrap">
-          <div class="row row--first row--wide-aside row--center">
-            <div>
-              <h2 id="s-result" class="chapter__h">The result</h2>
-              <p class="lede">In the real comparison, my algorithm detected 5&times; more lipid analytes than MZmine and MS-DIAL.</p>
-            </div>
-            <figure class="lcms-fig lcms-fig--result js-only" data-lcms-result aria-hidden="true">
-              <div class="project-media lcms-frame lcms-frame--result"></div>
             </figure>
           </div>
         </div>

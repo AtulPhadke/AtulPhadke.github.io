@@ -54,7 +54,6 @@
 @media (min-width: 40rem) {
   .lcms-frame--link { aspect-ratio: 16 / 10; }
 }
-.lcms-frame--result { aspect-ratio: 16 / 8; }
 
 .lcms-static {
   width: 100%;
@@ -195,11 +194,12 @@
 .lcms-tag--linked .lcms-tag__out { color: var(--color-ch2-ink); }
 .lcms-tag--ambiguous .lcms-tag__out { color: var(--color-ink-2); }
 
-/* ---------- The result units ---------- */
-.lcms-res__row { color: var(--color-ink-2); }
-.lcms-res__row--ours {
+/* ---------- The result, in words ---------- */
+.lcms-result__word {
+  font-size: clamp(2rem, 3.2vw, 3rem);
+  line-height: 1;
   color: var(--color-ch2-ink);
-  font-weight: 600;
+  overflow-wrap: anywhere;
 }
 
 /* ---------- Captions with controls ---------- */
